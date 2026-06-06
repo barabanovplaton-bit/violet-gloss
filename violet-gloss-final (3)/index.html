@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violet Gloss — Премиальный детейлинг и автосервис в Дубае</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .map-section {
+            padding: 60px 40px;
+            background: var(--white);
+            text-align: center;
+        }
+        .map-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+        .reviews-more {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="loader-logo">Violet <span>Gloss</span></div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <div id="header-container"></div>
+
+    <!-- HERO -->
+    <section class="hero anim anim-up">
+        <h1 data-i18n="hero.title"><span class="brand">Violet <span>Gloss</span></span> — премиальный детейлинг в Дубае</h1>
+        <p data-i18n="hero.subtitle">Защита кузова, интерьера и сервис, которому доверяет правительство и полиция эмирата</p>
+        <div class="hero-buttons">
+            <a href="services.html" class="btn-primary" data-i18n="hero.btn.services">Смотреть услуги</a>
+            <a href="portfolio.html" class="btn-secondary" data-i18n="hero.btn.contact">Портфолио работ</a>
+        </div>
+    </section>
+
+    <!-- О компании с быстрыми зацикленными счётчиками -->
+    <section class="about-brief anim anim-up" style="padding: 80px 40px; max-width: 900px; margin: 0 auto; text-align: center;">
+        <h2 data-i18n="about.brief.title2" style="font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 2.5rem; margin-bottom: 24px;">Violet Gloss — больше, чем детейлинг</h2>
+        <p data-i18n="about.brief.desc" style="color: var(--text-gray); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.8;">
+            Мы не просто придаём автомобилям блеск. Мы создаём стандарт премиального обслуживания, которому доверяют государственные структуры Дубая, владельцы эксклюзивных авто и те, кто ценит безупречность.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+            <div>
+                <div class="counter" data-target="7" style="font-size: 2.5rem; font-weight: 600; color: var(--accent);">0+</div>
+                <div style="color: var(--text-gray); font-size: 0.9rem;" data-i18n="counter.years">лет опыта</div>
+            </div>
+            <div>
+                <div class="counter" data-target="12" style="font-size: 2.5rem; font-weight: 600; color: var(--accent);">0</div>
+                <div style="color: var(--text-gray); font-size: 0.9rem;" data-i18n="counter.bays">охраняемых боксов</div>
+            </div>
+            <div>
+                <div class="counter" data-target="2000" style="font-size: 2.5rem; font-weight: 600; color: var(--accent);">0+</div>
+                <div style="color: var(--text-gray); font-size: 0.9rem;" data-i18n="counter.clients">довольных клиентов</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Почему мы -->
+    <section class="trust anim anim-up">
+        <h2 data-i18n="trust.title">Почему выбирают Violet Gloss</h2>
+        <div class="trust-grid" data-anim-children="up">
+            <div class="trust-item">
+                <div class="trust-icon">&#9672;</div>
+                <h4 data-i18n="trust.closed_boxes">Закрытые стерильные боксы</h4>
+                <p data-i18n="trust.closed_boxes.desc.index">Каждый автомобиль хранится в охраняемом помещении с фильтрацией воздуха — ни пыли, ни посторонних глаз.</p>
+                <div class="trust-line"></div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">&#9679;</div>
+                <h4 data-i18n="trust.masters_7_plus">Мастера с опытом от 7 лет</h4>
+                <p data-i18n="trust.masters.desc.index">Наши специалисты работали с премиум-брендами в Европе и Азии, знают всё о материалах и технологиях.</p>
+                <div class="trust-line"></div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">&#9711;</div>
+                <h4 data-i18n="trust.concierge">Консьерж-сервис</h4>
+                <p data-i18n="trust.concierge.desc.index">Заберём авто из любой точки Дубая, предоставим подменный автомобиль и вернём машину с полным отчётом.</p>
+                <div class="trust-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПАРТНЁРЫ -->
+    <section class="partners-section anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="partners.title">Наши партнёры и поставщики</h2>
+            <p class="section-subtitle" data-i18n="partners.subtitle">Мы работаем только с проверенными мировыми брендами, гарантируя качество материалов и работ.</p>
+            <div class="partners-grid" data-anim-children="scale">
+                <div class="partner-card"><div class="partner-logo">XPEL</div><p data-i18n="partner.xpel.desc">Защитные плёнки</p></div>
+                <div class="partner-card"><div class="partner-logo">STEK</div><p data-i18n="partner.stek.desc">Полиуретановые покрытия</p></div>
+                <div class="partner-card"><div class="partner-logo">SunTek</div><p data-i18n="partner.suntek.desc">Антигравийные плёнки</p></div>
+                <div class="partner-card"><div class="partner-logo">3M</div><p data-i18n="partner.3m.desc">Виниловые плёнки</p></div>
+                <div class="partner-card"><div class="partner-logo">Llumar</div><p data-i18n="partner.llumar.desc">Атермальные плёнки</p></div>
+                <div class="partner-card"><div class="partner-logo">StP</div><p data-i18n="partner.stp.desc">Шумоизоляция</p></div>
+                <div class="partner-card"><div class="partner-logo">Dynamat</div><p data-i18n="partner.dynamat.desc">Премиум-шумка</p></div>
+                <div class="partner-card"><div class="partner-logo">Castrol</div><p data-i18n="partner.castrol.desc">Моторные масла</p></div>
+                <div class="partner-card"><div class="partner-logo">Mobil 1</div><p data-i18n="partner.mobil1.desc">Синтетические масла</p></div>
+                <div class="partner-card"><div class="partner-logo">Liqui Moly</div><p data-i18n="partner.liquimoly.desc">Присадки и автохимия</p></div>
+                <div class="partner-card"><div class="partner-logo">Bosch</div><p data-i18n="partner.bosch.desc">Запчасти и фильтры</p></div>
+                <div class="partner-card"><div class="partner-logo">Alcantara</div><p data-i18n="partner.alcantara.desc">Материалы для салона</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Процесс работы -->
+    <section class="process anim anim-up">
+        <h2 data-i18n="process.title">Как мы работаем</h2>
+        <div class="process-steps" data-anim-children="up">
+            <div class="process-step"><div class="step-number">1</div><h4 data-i18n="process.index.step1">Осмотр и консультация</h4><p data-i18n="process.index.step1.desc">Оцениваем состояние кузова и салона, подбираем материал.</p></div>
+            <div class="process-step"><div class="step-number">2</div><h4 data-i18n="process.step.preparation">Подготовка</h4><p data-i18n="process.index.step2.desc">Мойка, обезжиривание, демонтаж деталей.</p></div>
+            <div class="process-step"><div class="step-number">3</div><h4 data-i18n="process.index.step3">Работа в цехе</h4><p data-i18n="process.index.step3.desc">Оклейка, реставрация или сервис — всё в стерильном цехе.</p></div>
+            <div class="process-step"><div class="step-number">4</div><h4 data-i18n="process.index.step4">Контроль и выдача</h4><p data-i18n="process.index.step4.desc">Финальная проверка под УФ-лампой, возврат автомобиля.</p></div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="reviews anim anim-up">
+        <h2 data-i18n="reviews.title">Отзывы наших клиентов</h2>
+        <div class="review-cards" data-anim-children="up">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text" data-i18n="review.index.1">«Лучший сервис в Дубае! Оклеили Range Rover плёнкой XPEL — машина как новая.»</p>
+                <div class="review-author" data-i18n="review.index.1.author">Алексей М.</div>
+                <div class="review-car">Range Rover Sport</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text" data-i18n="review.index.2">«Заказывал полную оклейку + керамику. Ребята — профессионалы, всё чётко.»</p>
+                <div class="review-author" data-i18n="review.index.2.author">Андрей К.</div>
+                <div class="review-car">BMW X6</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text" data-i18n="review.index.3">«Перед продажей сделали детейлинг — авто забрали через 3 дня, блестит!»</p>
+                <div class="review-author" data-i18n="review.index.3.author">Ольга В.</div>
+                <div class="review-car">Mercedes GLE</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text" data-i18n="review.index.4">«Шумоизоляция превзошла ожидания, в салоне тихо как в премиум-седане!»</p>
+                <div class="review-author" data-i18n="review.index.4.author">Иван С.</div>
+                <div class="review-car">Honda Accord</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text" data-i18n="review.index.5">«Перешив салона кожей Nappa — это произведение искусства.»</p>
+                <div class="review-author" data-i18n="review.index.5.author">Татьяна М.</div>
+                <div class="review-car">Audi Q7</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text" data-i18n="review.index.6">«Замена масла за 30 минут и кофе в подарок — сервис высший.»</p>
+                <div class="review-author" data-i18n="review.index.6.author">Павел Г.</div>
+                <div class="review-car">Toyota Camry</div>
+            </div>
+        </div>
+        <div class="reviews-more">
+            <a href="reviews.html" class="btn-secondary" data-i18n="btn.more_reviews">Больше отзывов</a>
+        </div>
+    </section>
+
+    <section class="map-section anim anim-up">
+    <div class="container">
+        <h2 class="section-title" data-i18n="map.title" style="margin-bottom: 30px;">Где нас найти</h2>
+        <div class="map-container" style="border-radius: 16px; overflow: hidden;">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.16835!2d55.204063!3d25.136517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA4JzExLjUiTiA1NcKwMTInMTQuNiJF!5e0!3m2!1sru!2sae!4v1700000000000!5m2!1sru!2sae"
+                width="100%"
+                height="350"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <p data-i18n="map.zoom_hint" style="margin-top: 15px; color: var(--text-gray); font-size: 0.9rem;">
+            Используйте Ctrl + колёсико мыши для зума на карте
+        </p>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипт быстрых зацикленных счётчиков -->
+    <script>
+        function animateCounters(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = document.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const suffix = counter.innerText.includes('+') ? '+' : '';
+                        const duration = 800;
+                        const step = target / (duration / 16);
+                        let current = 0;
+
+                        const update = () => {
+                            current += step;
+                            if (current < target) {
+                                counter.innerText = Math.floor(current) + suffix;
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.innerText = target + suffix;
+                            }
+                        };
+                        update();
+                    });
+                } else {
+                    const counters = document.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const suffix = counter.innerText.includes('+') ? '+' : '';
+                        counter.innerText = '0' + suffix;
+                    });
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(animateCounters, { threshold: 0.3 });
+        const aboutSection = document.querySelector('.about-brief');
+        if (aboutSection) observer.observe(aboutSection);
+    </script>
+
+    <script type="module" src="javascript/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.initCustomSelects && window.initCustomSelects();
+});
+</script>
+</body>
+</html>

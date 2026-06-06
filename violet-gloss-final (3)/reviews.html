@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы — Violet Gloss</title>
+    <meta name="description" content="Отзывы клиентов Violet Gloss — премиального детейлинг-центра в Дубае. Узнайте, что говорят о нас наши клиенты.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .reviews-page {
+            color: var(--text-dark);
+        }
+        .reviews-page .review-card p {
+            color: var(--text-dark);
+        }
+        .reviews-page .review-info h4 {
+            color: var(--text-dark);
+        }
+        .reviews-page .review-info span {
+            color: var(--text-gray);
+        }
+        .reviews-page .year-title {
+            color: var(--text-dark);
+        }
+        /* Dark theme overrides */
+        [data-theme="dark"] .reviews-page .review-card {
+            background: #1E1E1E;
+            border-color: #333;
+        }
+        [data-theme="dark"] .reviews-page .review-header .review-avatar {
+            background: linear-gradient(135deg, var(--accent), #ff8a50);
+        }
+        [data-theme="dark"] .reviews-page .year-title {
+            color: #E8E8E8;
+            border-bottom-color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Reviews Page -->
+    <section class="reviews-page anim anim-up">
+        <div class="container">
+            <h1 class="section-title" data-i18n="reviews.title">Отзывы клиентов</h1>
+            <p class="section-subtitle" data-i18n="reviews.subtitle">Что говорят о нас наши клиенты</p>
+
+            <!-- 2026 -->
+            <div class="reviews-year">
+                <h2 class="year-title">2026</h2>
+                <div class="reviews-grid" data-anim-children="up">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">АК</div>
+                            <div class="review-info">
+                                <h4>Алексей К.</h4>
+                                <span>Porsche 911 Turbo S</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2026.1">Оклеили плёнкой XPEL весь кузов. Работа выполнена безупречно — ни единого пузырька, все края идеально подогнаны. Рекомендую!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">МВ</div>
+                            <div class="review-info">
+                                <h4>Михаил В.</h4>
+                                <span>Mercedes-AMG GT</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2026.2">Делал тонировку и звёздное небо. Результат превзошёл ожидания! Консьерж-сервис на высшем уровне — забрали и вернули машину вовремя.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">AM</div>
+                            <div class="review-info">
+                                <h4>Ahmed Al M.</h4>
+                                <span>BMW X7</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2026.3">Great service for my X7. The team is professional and the quality is top-notch.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2025 -->
+            <div class="reviews-year">
+                <h2 class="year-title">2025</h2>
+                <div class="reviews-grid" data-anim-children="up">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ОН</div>
+                            <div class="review-info">
+                                <h4>Олег Н.</h4>
+                                <span>Range Rover Sport</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2025.1">Полная шумоизоляция и тонировка. В салоне стало значительно тише, а тонировка идеально ровная. Спасибо команде Violet Gloss!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ДП</div>
+                            <div class="review-info">
+                                <h4>Дмитрий П.</h4>
+                                <span>Bentley Continental GT</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2025.2">Реставрация кожи и звёздное небо — сделали как для себя. Кожа выглядит как новая, а потолок просто космос!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ЕС</div>
+                            <div class="review-info">
+                                <h4>Елена С.</h4>
+                                <span>BMW X6</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                        <p data-i18n="review.page.2025.3">Обращалась для реставрации кожаного салона. Мастера очень внимательны к деталям, результат отличный. Единственное — пришлось подождать пару дней.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">PS</div>
+                            <div class="review-info">
+                                <h4>Priya S.</h4>
+                                <span>Lexus LS 500</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2025.4">Interior restoration was amazing. My car looks brand new inside!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 -->
+            <div class="reviews-year">
+                <h2 class="year-title">2024</h2>
+                <div class="reviews-grid" data-anim-children="up">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">РА</div>
+                            <div class="review-info">
+                                <h4>Рустам А.</h4>
+                                <span>Cadillac Escalade</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2024.1">Комплексный детейлинг: оклейка, тонировка, звёздное небо. Всё в одном месте и с потрясающим качеством. Лучший сервис в Дубае!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ИК</div>
+                            <div class="review-info">
+                                <h4>Игорь К.</h4>
+                                <span>Lamborghini Urus</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2024.2">Оклейка плёнкой STEK — превосходный результат. Ребята знают своё дело на 100%. Автомобиль выглядит как с выставки!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">НШ</div>
+                            <div class="review-info">
+                                <h4>Наталья Ш.</h4>
+                                <span>Mercedes GLE</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2024.3">Делала шумоизоляцию для семейного авто. Теперь дети спокойно спят в дороге — шум от дороги практически не слышно. Огромное спасибо!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">DK</div>
+                            <div class="review-info">
+                                <h4>David K.</h4>
+                                <span>Audi RS7</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2024.4">Full PPF wrap — excellent fitment and attention to detail.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2023 -->
+            <div class="reviews-year">
+                <h2 class="year-title">2023</h2>
+                <div class="reviews-grid" data-anim-children="up">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">СВ</div>
+                            <div class="review-info">
+                                <h4>Сергей В.</h4>
+                                <span>Toyota Land Cruiser</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2023.1">Тонировка и шумоизоляция — всё выполнено быстро и качественно. Цена полностью соответствует результату.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">АР</div>
+                            <div class="review-info">
+                                <h4>Андрей Р.</h4>
+                                <span>BMW 7 Series</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                        <p data-i18n="review.page.2023.2">Замена масла и техобслуживание. Профессиональный подход, всё объяснили и показали. Буду обращаться ещё.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">HM</div>
+                            <div class="review-info">
+                                <h4>Hassan M.</h4>
+                                <span>Mercedes G63</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2023.3">Tinting and soundproofing — completely transformed the driving experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2022 -->
+            <div class="reviews-year">
+                <h2 class="year-title">2022</h2>
+                <div class="reviews-grid" data-anim-children="up">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ВМ</div>
+                            <div class="review-info">
+                                <h4>Виктор М.</h4>
+                                <span>Audi Q8</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2022.1">Оклейка плёнкой XPEL — идеальное покрытие, все детали проработаны до миллиметра. Очень доволен результатом!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ТД</div>
+                            <div class="review-info">
+                                <h4>Тимур Д.</h4>
+                                <span>Nissan Patrol</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2022.2">Звёздное небо — невероятная атмосфера в салоне! Дети в восторге, да и сам каждый раз любуюсь. Спасибо мастерам!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2021 -->
+            <div class="reviews-year">
+                <h2 class="year-title">2021</h2>
+                <div class="reviews-grid" data-anim-children="up">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">КЛ</div>
+                            <div class="review-info">
+                                <h4>Константин Л.</h4>
+                                <span>Porsche Cayenne</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2021.1">Полный комплекс: оклейка, тонировка, шумоизоляция. За три года с плёнкой ни одной царапины. Лучшее вложение в защиту авто!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">АХ</div>
+                            <div class="review-info">
+                                <h4>Али Х.</h4>
+                                <span>Mercedes S-Class</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2021.2">Реставрация кожи после 3 лет эксплуатации — салон выглядит лучше, чем новый. Настоящие профессионалы своего дела!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2019 -->
+            <div class="reviews-year">
+                <h2 class="year-title">2019</h2>
+                <div class="reviews-grid" data-anim-children="up">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ДБ</div>
+                            <div class="review-info">
+                                <h4>Давид Б.</h4>
+                                <span>Range Rover Vogue</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p data-i18n="review.page.2019.1">Один из первых клиентов Violet Gloss. С тех пор обслуживаю все свои автомобили только здесь. Качество стабильно высокое!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ОГ</div>
+                            <div class="review-info">
+                                <h4>Омар Г.</h4>
+                                <span>BMW X7</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                        <p data-i18n="review.page.2019.2">Шумоизоляция и тонировка. Результат хороший, хотя пришлось подождать из-за загруженности. В целом доволен.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="javascript/main.js"></script>
+    <script>
+        window.initCustomSelects && window.initCustomSelects();
+    </script>
+</body>
+</html>

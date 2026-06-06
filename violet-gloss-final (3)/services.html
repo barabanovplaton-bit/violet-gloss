@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги — Violet Gloss</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        .service-card {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <section class="services-section anim anim-up">
+        <h2 data-i18n="services.title">Наши услуги</h2>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Все</button>
+            <button class="filter-btn" data-filter="protection" data-i18n="filter.protection">Защита и оклейка</button>
+            <button class="filter-btn" data-filter="interior" data-i18n="filter.interior">Интерьер и уход</button>
+            <button class="filter-btn" data-filter="service" data-i18n="filter.autoservice">Автосервис</button>
+        </div>
+
+        <div class="services-grid" data-anim-children="up">
+            <a href="oil-change.html" class="service-card" data-category="service">
+                <h3 data-i18n="services.oil.title">Замена масла</h3>
+                <p data-i18n="services.oil.desc">Оригинальные масла Castrol, Mobil 1, Liqui Moly. Все марки авто.</p>
+                <span class="price">от 250 AED</span>
+                <span class="btn-primary" data-i18n="btn.details">Подробнее</span>
+            </a>
+            <a href="auto-service.html" class="service-card" data-category="service">
+                <h3 data-i18n="services.maintenance.title">Техобслуживание</h3>
+                <p data-i18n="services.maintenance.desc">Честный автосервис: замена масла, диагностика, ремонт ходовой.</p>
+                <span class="price">от 500 AED</span>
+                <span class="btn-primary" data-i18n="btn.details">Подробнее</span>
+            </a>
+            <a href="leather-restoration.html" class="service-card" data-category="interior">
+                <h3 data-i18n="services.leather.title">Реставрация кожи</h3>
+                <p data-i18n="services.leather.desc">Локальный ремонт, перетяжка, полный перешив салона. Итальянская кожа.</p>
+                <span class="price">от 800 AED</span>
+                <span class="btn-primary" data-i18n="btn.details">Подробнее</span>
+            </a>
+            <a href="tinting.html" class="service-card" data-category="protection">
+                <h3 data-i18n="services.tinting.title">Тонировка</h3>
+                <p data-i18n="services.tinting.desc">Атермальная плёнка: защита от УФ-лучей и перегрева. Llumar, 3M, XPEL.</p>
+                <span class="price">от 1 200 AED</span>
+                <span class="btn-primary" data-i18n="btn.details">Подробнее</span>
+            </a>
+            <a href="noise-isolation.html" class="service-card" data-category="interior">
+                <h3 data-i18n="services.noise.title">Шумоизоляция</h3>
+                <p data-i18n="services.noise.desc">Вибро- и шумоизоляция премиум-материалами StP, Dynamat. Тишина в салоне.</p>
+                <span class="price">от 1 200 AED</span>
+                <span class="btn-primary" data-i18n="btn.details">Подробнее</span>
+            </a>
+            <a href="starry-sky.html" class="service-card" data-category="interior">
+                <h3 data-i18n="services.starry.title">Звёздное небо</h3>
+                <p data-i18n="services.starry.desc">Оптоволоконная инсталляция в потолок: сотни звёзд, падающие метеоры.</p>
+                <span class="price">от 3 000 AED</span>
+                <span class="btn-primary" data-i18n="btn.details">Подробнее</span>
+            </a>
+            <a href="wrapping.html" class="service-card" data-category="protection">
+                <h3 data-i18n="services.wrapping.title">Оклейка кузова</h3>
+                <p data-i18n="services.wrapping.desc">Винил, PPF, антигравийная защита. Гарантия до 10 лет. XPEL, STEK, SunTek.</p>
+                <span class="price">от 4 500 AED</span>
+                <span class="btn-primary" data-i18n="btn.details">Подробнее</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.service-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                        // Re-trigger anim: remove visible, add back anim classes
+                        card.classList.remove('visible');
+                        card.offsetHeight; // force reflow
+                        card.classList.add('visible');
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="module" src="javascript/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.initCustomSelects && window.initCustomSelects();
+});
+</script>
+</body>
+</html>

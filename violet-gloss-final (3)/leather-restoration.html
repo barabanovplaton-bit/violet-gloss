@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реставрация и перешив кожаного салона — Violet Gloss</title>
+    <meta name="description" content="Реставрация и перешив кожаного салона в Дубае. Alcantara, Nappa Leather, Leatherique, Colourlock. Восстановление до состояния нового.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Service Hero -->
+    <section class="service-hero anim anim-up">
+        <div class="container">
+            <h1 data-i18n="services.leather.page.title">Реставрация и перешив кожаного салона</h1>
+            <p data-i18n="services.leather.page.subtitle">Восстановление кожаного салона до состояния нового: устранение трещин, потёртостей, выцветания. Используем материалы Alcantara и премиальную кожу.</p>
+            <a href="contacts.html" class="btn-primary" data-i18n="btn.calculate_price">Рассчитать стоимость</a>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section anim anim-up" id="tariffs">
+        <div class="container">
+            <h2 class="section-title" data-i18n="pricing.title">Тарифы</h2>
+            <p class="section-subtitle" data-i18n="pricing.leather.subtitle">Выберите оптимальный вариант реставрации для вашего автомобиля</p>
+            <div class="pricing-grid" data-anim-children="scale">
+                <div class="pricing-card">
+                    <h3 data-i18n="pricing.leather.local">Локальный ремонт</h3>
+                    <div class="price">800 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.leather.local.f1">Устранение трещин и потёртостей</li>
+                        <li data-i18n="pricing.leather.local.f2">Подбор цвета и текстуры</li>
+                        <li data-i18n="pricing.leather.local.f3">Ремонт одного-двух элементов</li>
+                        <li data-i18n="pricing.warranty_1">Гарантия 1 год</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+                <div class="pricing-card recommended">
+                    <span class="badge" data-i18n="badge.recommended">Рекомендуем</span>
+                    <h3 data-i18n="pricing.leather.restoration">Восстановление</h3>
+                    <div class="price">2 500 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.leather.restoration.f1">Полное восстановление цвета кожи</li>
+                        <li data-i18n="pricing.leather.restoration.f2">Устранение всех дефектов</li>
+                        <li data-i18n="pricing.leather.restoration.f3">Обработка всех сидений</li>
+                        <li data-i18n="pricing.leather.restoration.f4">Защитное покрытие</li>
+                        <li data-i18n="pricing.warranty_2">Гарантия 2 года</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 data-i18n="pricing.leather.retrim">Полный перешив</h3>
+                    <div class="price">6 000 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.leather.retrim.f1">Полная замена обивки сидений</li>
+                        <li data-i18n="pricing.leather.retrim.f2">Премиальная кожа Nappa / Alcantara</li>
+                        <li data-i18n="pricing.leather.retrim.f3">Индивидуальный дизайн и простежка</li>
+                        <li data-i18n="pricing.leather.retrim.f4">Перешив дверных карт и руля</li>
+                        <li data-i18n="pricing.leather.retrim.f5">Защитное покрытие + керамика</li>
+                        <li data-i18n="pricing.warranty_3">Гарантия 3 года</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="trust.advantage">Наше преимущество</h2>
+            <div class="trust-grid" data-anim-children="up">
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="16" width="32" height="24" rx="3" stroke="#FF5A00" stroke-width="2"/>
+                            <path d="M16 16V12C16 9.79086 17.7909 8 20 8H28C30.2091 8 32 9.79086 32 12V16" stroke="#FF5A00" stroke-width="2"/>
+                            <rect x="20" y="24" width="8" height="6" rx="1" fill="#FF5A00"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.closed_boxes">Закрытые стерильные боксы</h4>
+                    <p data-i18n="trust.closed_boxes.desc">Полная конфиденциальность и безопасность вашего автомобиля в индивидуальном закрытом стерильном боксе на время всех работ.</p>
+                    <div class="trust-line"></div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 6L28.5 17H40L30.5 24.5L34 36L24 29L14 36L17.5 24.5L8 17H19.5L24 6Z" stroke="#FF5A00" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.masters_7">Мастера 7+ лет</h4>
+                    <p data-i18n="trust.masters_7.desc">Наши специалисты имеют стаж работы более 7 лет и сертификацию от ведущих мировых брендов детейлинг-индустрии.</p>
+                    <div class="trust-line"></div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="16" stroke="#FF5A00" stroke-width="2"/>
+                            <path d="M24 14V24L30 30" stroke="#FF5A00" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M8 24H4M44 24H40M24 4V8M24 40V44" stroke="#FF5A00" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.concierge">Консьерж-сервис</h4>
+                    <p data-i18n="trust.concierge.desc">Забираем и доставляем ваш автомобиль в удобное для вас время и место. Вам не нужно никуда ехать — мы всё сделаем за вас.</p>
+                    <div class="trust-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners-section anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="partners.title2">Наши партнёры</h2>
+            <p class="section-subtitle" data-i18n="partners.subtitle2">Работаем только с лучшими мировыми брендами</p>
+            <div class="partners-grid" data-anim-children="scale">
+                <div class="partner-card">
+                    <div class="partner-logo">Alcantara</div>
+                    <p data-i18n="partner.alcantara.full_desc2">Итальянский премиум-материал для эксклюзивной отделки автомобильных интерьеров</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">Nappa Leather</div>
+                    <p data-i18n="partner.nappa.full_desc">Мягкая и прочная кожа высшего сорта для перешива салона премиум-автомобилей</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">Leatherique</div>
+                    <p data-i18n="partner.leatherique.full_desc">Профессиональные составы для реставрации, очистки и кондиционирования кожи</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">Colourlock</div>
+                    <p data-i18n="partner.colourlock.full_desc">Системы точной колеровки и ремонта кожаных поверхностей любой сложности</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="process.how_we_work">Как мы работаем</h2>
+            <div class="process-steps" data-anim-children="up">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h4 data-i18n="process.step.inspection">Осмотр</h4>
+                    <p data-i18n="process.leather.inspection.desc">Детальная оценка состояния кожаного салона, определение объёма работ и подбор материалов.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h4 data-i18n="process.step.preparation">Подготовка</h4>
+                    <p data-i18n="process.leather.preparation.desc">Глубокая очистка кожи, удаление старых покрытий и подготовка поверхности к реставрации.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h4 data-i18n="process.leather.work">Реставрация / перешив</h4>
+                    <p data-i18n="process.leather.work.desc">Восстановление цвета и текстуры или полный перешив с использованием выбранных материалов.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h4 data-i18n="process.step.control">Контроль</h4>
+                    <p data-i18n="process.leather.control.desc">Финальная проверка качества, нанесение защитного покрытия и осмотр клиентом результата.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="reviews.clients">Отзывы клиентов</h2>
+            <div class="review-cards" data-anim-children="up">
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text" data-i18n="review.leather.3">Реставрация кожи и звёздное небо — сделали как для себя. Кожа выглядит как новая, а потолок просто космос!</p>
+                    <div class="review-meta">
+                        <span class="review-author">Arjun P.</span>
+                        <span class="review-car">Bentley Continental GT</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                    <p class="review-text" data-i18n="review.leather.2">Обращалась для реставрации кожаного салона. Мастера очень внимательны к деталям, результат отличный. Единственное — пришлось подождать пару дней.</p>
+                    <div class="review-meta">
+                        <span class="review-author">Lisa T.</span>
+                        <span class="review-car">BMW X6</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text" data-i18n="review.leather.1">Полный перешив салона кожой Nappa — результат превзошёл все ожидания. Машина стала как из салона, а может даже лучше!</p>
+                    <div class="review-meta">
+                        <span class="review-author">Mohammed K.</span>
+                        <span class="review-car">Cadillac Escalade</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="javascript/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.initCustomSelects && window.initCustomSelects();
+});
+</script>
+</body>
+</html>

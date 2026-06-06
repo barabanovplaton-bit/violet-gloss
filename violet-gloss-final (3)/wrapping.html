@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оклейка автомобилей премиум-класса в Дубае — Violet Gloss</title>
+    <meta name="description" content="Профессиональная оклейка кузова винилом и PPF в Дубае. Защита от сколов, царапин и UV. XPEL, STEK, SunTek, 3M.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Service Hero -->
+    <section class="service-hero anim anim-up">
+        <div class="container">
+            <h1 data-i18n="services.wrapping.page.title">Оклейка автомобилей премиум-класса в Дубае</h1>
+            <p data-i18n="services.wrapping.page.subtitle">Защитная и декоративная оклейка кузова плёнками мировых брендов. Сохраняем идеальный внешний вид вашего автомобиля на долгие годы.</p>
+            <a href="contacts.html" class="btn-primary" data-i18n="btn.calculate_price">Рассчитать стоимость</a>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section anim anim-up" id="tariffs">
+        <div class="container">
+            <h2 class="section-title" data-i18n="pricing.title">Тарифы</h2>
+            <p class="section-subtitle" data-i18n="pricing.wrapping.subtitle">Выберите оптимальный вариант оклейки для вашего автомобиля</p>
+            <div class="pricing-grid" data-anim-children="scale">
+                <div class="pricing-card">
+                    <h3 data-i18n="pricing.wrapping.vinyl_standard">Винил Стандарт</h3>
+                    <div class="price">4 500 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.wrapping.vinyl_standard.f1">Декоративная виниловая плёнка</li>
+                        <li data-i18n="pricing.wrapping.vinyl_standard.f2">Оклейка основных элементов кузова</li>
+                        <li data-i18n="pricing.warranty_2">Гарантия 2 года</li>
+                        <li data-i18n="pricing.wrapping.vinyl_standard.f4">Защита от мелких царапин</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 data-i18n="pricing.wrapping.vinyl_optimal">Винил Оптимал</h3>
+                    <div class="price">7 200 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.wrapping.vinyl_optimal.f1">Премиальная виниловая плёнка</li>
+                        <li data-i18n="pricing.wrapping.vinyl_optimal.f2">Оклейка всего кузова</li>
+                        <li data-i18n="pricing.warranty_3">Гарантия 3 года</li>
+                        <li data-i18n="pricing.wrapping.vinyl_optimal.f4">Защита от царапин и UV</li>
+                        <li data-i18n="pricing.concierge">Консьерж-сервис</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+                <div class="pricing-card recommended">
+                    <span class="badge" data-i18n="badge.recommended">Рекомендуем</span>
+                    <h3 data-i18n="pricing.wrapping.ppf">PPF Premium</h3>
+                    <div class="price">12 000 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.wrapping.ppf.f1">Полиуретановая защитная плёнка</li>
+                        <li data-i18n="pricing.wrapping.ppf.f2">Полная оклейка кузова</li>
+                        <li data-i18n="pricing.warranty_5">Гарантия 5 лет</li>
+                        <li data-i18n="pricing.wrapping.ppf.f4">Самовосстанавливающийся слой</li>
+                        <li data-i18n="pricing.wrapping.ppf.f5">Защита от сколов и гравия</li>
+                        <li data-i18n="pricing.concierge">Консьерж-сервис</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 data-i18n="pricing.wrapping.ultimate">Ultimate Full Body</h3>
+                    <div class="price">18 000 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.wrapping.ultimate.f1">Премиум PPF + винил-комбинация</li>
+                        <li data-i18n="pricing.wrapping.ultimate.f2">Полная оклейка включая диски</li>
+                        <li data-i18n="pricing.warranty_7">Гарантия 7 лет</li>
+                        <li data-i18n="pricing.wrapping.ultimate.f4">Керамика в подарок</li>
+                        <li data-i18n="pricing.wrapping.ultimate.f5">Индивидуальный дизайн</li>
+                        <li data-i18n="pricing.concierge_vip">Консьерж-сервис + VIP-бокс</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="trust.advantage">Наше преимущество</h2>
+            <div class="trust-grid" data-anim-children="up">
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="16" width="32" height="24" rx="3" stroke="#FF5A00" stroke-width="2"/>
+                            <path d="M16 16V12C16 9.79086 17.7909 8 20 8H28C30.2091 8 32 9.79086 32 12V16" stroke="#FF5A00" stroke-width="2"/>
+                            <rect x="20" y="24" width="8" height="6" rx="1" fill="#FF5A00"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.closed_boxes">Закрытые стерильные боксы</h4>
+                    <p data-i18n="trust.closed_boxes.desc">Полная конфиденциальность и безопасность вашего автомобиля в индивидуальном закрытом стерильном боксе на время всех работ.</p>
+                    <div class="trust-line"></div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 6L28.5 17H40L30.5 24.5L34 36L24 29L14 36L17.5 24.5L8 17H19.5L24 6Z" stroke="#FF5A00" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.masters_7">Мастера 7+ лет</h4>
+                    <p data-i18n="trust.masters_7.desc">Наши специалисты имеют стаж работы более 7 лет и сертификацию от ведущих мировых брендов детейлинг-индустрии.</p>
+                    <div class="trust-line"></div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="16" stroke="#FF5A00" stroke-width="2"/>
+                            <path d="M24 14V24L30 30" stroke="#FF5A00" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M8 24H4M44 24H40M24 4V8M24 40V44" stroke="#FF5A00" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.concierge">Консьерж-сервис</h4>
+                    <p data-i18n="trust.concierge.desc">Забираем и доставляем ваш автомобиль в удобное для вас время и место. Вам не нужно никуда ехать — мы всё сделаем за вас.</p>
+                    <div class="trust-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners-section anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="partners.title2">Наши партнёры</h2>
+            <p class="section-subtitle" data-i18n="partners.subtitle2">Работаем только с лучшими мировыми брендами</p>
+            <div class="partners-grid" data-anim-children="scale">
+                <div class="partner-card">
+                    <div class="partner-logo">XPEL</div>
+                    <p data-i18n="partner.xpel.full_desc">Мировой лидер в производстве защитных плёнок для автомобилей</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">STEK</div>
+                    <p data-i18n="partner.stek.full_desc">Инновационные PPF-плёнки с нанопокрытием и самовосстановлением</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">SunTek</div>
+                    <p data-i18n="partner.suntek.full_desc">Высокотехнологичные защитные и тонировочные плёнки премиум-класса</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">3M</div>
+                    <p data-i18n="partner.3m.full_desc">Легендарный бренд с более чем 100-летней историей инноваций</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="process.how_we_work">Как мы работаем</h2>
+            <div class="process-steps" data-anim-children="up">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h4 data-i18n="process.step.inspection">Осмотр</h4>
+                    <p data-i18n="process.wrapping.inspection.desc">Детальный осмотр кузова, оценка состояния лакокрасочного покрытия и подбор оптимальной плёнки.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h4 data-i18n="process.step.preparation">Подготовка</h4>
+                    <p data-i18n="process.wrapping.preparation.desc">Тщательная мойка, обезжиривание и подготовка поверхности кузова для идеальной адгезии плёнки.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h4 data-i18n="process.wrapping.application">Оклейка</h4>
+                    <p data-i18n="process.wrapping.application.desc">Профессиональная укладка плёнки в стерильном боксе с контролем температуры и влажности.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h4 data-i18n="process.step.control">Контроль</h4>
+                    <p data-i18n="process.wrapping.control.desc">Финальная проверка качества, устранение мельчайших дефектов и передача автомобиля клиенту.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="reviews.clients">Отзывы клиентов</h2>
+            <div class="review-cards" data-anim-children="up">
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text" data-i18n="review.wrapping.1">Оклеили плёнкой XPEL весь кузов Porsche. Работа выполнена безупречно — ни единого пузырька, все края идеально подогнаны. Рекомендую!</p>
+                    <div class="review-meta">
+                        <span class="review-author">James W.</span>
+                        <span class="review-car">Porsche 911 Turbo S</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text" data-i18n="review.wrapping.2">Делал полную оклейку PPF на Mercedes-AMG. Через полгода плёнка как новая, ни одного скола. Мастера знают своё дело!</p>
+                    <div class="review-meta">
+                        <span class="review-author">Fatima H.</span>
+                        <span class="review-car">Mercedes-AMG GT</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                    <p class="review-text" data-i18n="review.wrapping.3">Оклейка винилом под карбон — выглядит потрясающе. Единственное, пришлось подождать пару дней из-за очереди. Результат того стоит.</p>
+                    <div class="review-meta">
+                        <span class="review-author">Priya D.</span>
+                        <span class="review-car">BMW M5 Competition</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="javascript/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.initCustomSelects && window.initCustomSelects();
+});
+</script>
+</body>
+</html>
