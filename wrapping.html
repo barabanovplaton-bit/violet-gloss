@@ -25,7 +25,68 @@
 </head>
 <body>
     <!-- Header -->
-    <div id="header-container"></div>
+    <div id="header-container">
+<header class="header">
+    <a href="index.html" class="logo">
+        <span class="logo-full">Violet <span class="accent">Gloss</span></span>
+        <span class="logo-mobile"><span class="char-v">V</span><span class="char-g">G</span></span>
+    </a>
+    <nav class="nav" id="main-nav">
+        <button class="nav-close-btn" id="nav-close-btn" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div id="mobile-user-block" class="mobile-user-block" style="display:none;"></div>
+        <div id="mobile-auth-buttons" class="mobile-auth-buttons" style="display:none;"></div>
+
+        <div class="services-menu">
+            <a href="services.html" class="nav-link services-trigger" data-i18n="nav.services">Услуги</a>
+            <div class="mega-menu">
+                <div class="mega-col">
+                    <h4 data-i18n="services.protection">Защита и оклейка</h4>
+                    <ul>
+                        <li><a href="wrapping.html"><span data-i18n="services.wrapping">Оклейка кузова</span><span class="service-desc" data-i18n="services.wrapping.desc">Винил / PPF</span></a></li>
+                        <li><a href="tinting.html"><span data-i18n="services.tinting">Тонировка</span><span class="service-desc" data-i18n="services.tinting.desc">Атермальная плёнка</span></a></li>
+                    </ul>
+                </div>
+                <div class="mega-col">
+                    <h4 data-i18n="services.interior">Интерьер и уход</h4>
+                    <ul>
+                        <li><a href="starry-sky.html"><span data-i18n="services.starry">Звёздное небо</span><span class="service-desc" data-i18n="services.starry.desc">Оптоволокно</span></a></li>
+                        <li><a href="leather-restoration.html"><span data-i18n="services.leather">Реставрация кожи</span><span class="service-desc" data-i18n="services.leather.desc">Перешив салона</span></a></li>
+                        <li><a href="noise-isolation.html"><span data-i18n="services.noise">Шумоизоляция</span><span class="service-desc" data-i18n="services.noise.desc">Комфорт в салоне</span></a></li>
+                    </ul>
+                </div>
+                <div class="mega-col">
+                    <h4 data-i18n="services.autoservice">Автосервис</h4>
+                    <ul>
+                        <li><a href="auto-service.html"><span data-i18n="services.maintenance">Техобслуживание</span></a></li>
+                        <li><a href="oil-change.html"><span data-i18n="services.oil">Замена масла</span><span class="service-desc" data-i18n="services.oil.desc">Все бренды</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <a href="portfolio.html" class="nav-link" data-i18n="nav.portfolio">Портфолио</a>
+        <a href="about.html" class="nav-link" data-i18n="nav.about">О нас</a>
+        <a href="contacts.html" class="nav-link" data-i18n="nav.contacts">Контакты</a>
+        <a href="reviews.html" class="nav-link" data-i18n="nav.reviews">Отзывы</a>
+        <div id="auth-buttons" style="display: flex; gap: 10px; align-items: center;">
+            <a href="login.html" class="btn-secondary" style="padding: 10px 20px;" data-i18n="nav.login">Войти</a>
+            <a href="register.html" class="btn-primary" style="padding: 10px 20px;" data-i18n="nav.register">Регистрация</a>
+        </div>
+    </nav>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
+        <div class="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+</header>
+</div>
+<div class="nav-overlay" id="nav-overlay"></div>
 
     <!-- Service Hero -->
     <section class="service-hero">
@@ -261,11 +322,8 @@
         </div>
     </footer>
 
-    <script type="module" src="javascript/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    window.initCustomSelects && window.initCustomSelects();
-});
-</script>
+    <script src="javascript/app.js"></script>
+<script type="module" src="javascript/main.js"></script>
+
 </body>
 </html>
