@@ -17,8 +17,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Violet Gloss — Премиальный детейлинг и автосервис в Дубае</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://www.gstatic.com">
-    <link rel="dns-prefetch" href="https://www.gstatic.com">
     <link rel="stylesheet" href="styles/style.css">
     <style>
         .map-section {
@@ -43,6 +41,7 @@
             margin-top: 30px;
         }
     </style>
+<script>setTimeout(function(){var p=document.getElementById("preloader");if(p){p.style.opacity="0";setTimeout(function(){p.remove()},500)}},3000);</script>
 </head>
 <body>
     <div id="preloader">
@@ -53,7 +52,7 @@
     <div id="header-container"></div>
 
     <!-- HERO -->
-    <section class="hero anim anim-up">
+    <section class="hero">
         <h1 data-i18n="hero.title"><span class="brand">Violet <span>Gloss</span></span> — премиальный детейлинг в Дубае</h1>
         <p data-i18n="hero.subtitle">Защита кузова, интерьера и сервис, которому доверяет правительство и полиция эмирата</p>
         <div class="hero-buttons">
@@ -63,7 +62,7 @@
     </section>
 
     <!-- О компании с быстрыми зацикленными счётчиками -->
-    <section class="about-brief anim anim-up" style="padding: 80px 40px; max-width: 900px; margin: 0 auto; text-align: center;">
+    <section class="about-brief" style="padding: 80px 40px; max-width: 900px; margin: 0 auto; text-align: center;">
         <h2 data-i18n="about.brief.title2" style="font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 2.5rem; margin-bottom: 24px;">Violet Gloss — больше, чем детейлинг</h2>
         <p data-i18n="about.brief.desc" style="color: var(--text-gray); font-size: 1.1rem; margin-bottom: 40px; line-height: 1.8;">
             Мы не просто придаём автомобилям блеск. Мы создаём стандарт премиального обслуживания, которому доверяют государственные структуры Дубая, владельцы эксклюзивных авто и те, кто ценит безупречность.
@@ -85,9 +84,9 @@
     </section>
 
     <!-- Почему мы -->
-    <section class="trust anim anim-up">
+    <section class="trust">
         <h2 data-i18n="trust.title">Почему выбирают Violet Gloss</h2>
-        <div class="trust-grid" data-anim-children="up">
+        <div class="trust-grid">
             <div class="trust-item">
                 <div class="trust-icon">&#9672;</div>
                 <h4 data-i18n="trust.closed_boxes">Закрытые стерильные боксы</h4>
@@ -110,11 +109,11 @@
     </section>
 
     <!-- ПАРТНЁРЫ -->
-    <section class="partners-section anim anim-up">
+    <section class="partners-section">
         <div class="container">
             <h2 class="section-title" data-i18n="partners.title">Наши партнёры и поставщики</h2>
             <p class="section-subtitle" data-i18n="partners.subtitle">Мы работаем только с проверенными мировыми брендами, гарантируя качество материалов и работ.</p>
-            <div class="partners-grid" data-anim-children="scale">
+            <div class="partners-grid">
                 <div class="partner-card"><div class="partner-logo">XPEL</div><p data-i18n="partner.xpel.desc">Защитные плёнки</p></div>
                 <div class="partner-card"><div class="partner-logo">STEK</div><p data-i18n="partner.stek.desc">Полиуретановые покрытия</p></div>
                 <div class="partner-card"><div class="partner-logo">SunTek</div><p data-i18n="partner.suntek.desc">Антигравийные плёнки</p></div>
@@ -132,9 +131,9 @@
     </section>
 
     <!-- Процесс работы -->
-    <section class="process anim anim-up">
+    <section class="process">
         <h2 data-i18n="process.title">Как мы работаем</h2>
-        <div class="process-steps" data-anim-children="up">
+        <div class="process-steps">
             <div class="process-step"><div class="step-number">1</div><h4 data-i18n="process.index.step1">Осмотр и консультация</h4><p data-i18n="process.index.step1.desc">Оцениваем состояние кузова и салона, подбираем материал.</p></div>
             <div class="process-step"><div class="step-number">2</div><h4 data-i18n="process.step.preparation">Подготовка</h4><p data-i18n="process.index.step2.desc">Мойка, обезжиривание, демонтаж деталей.</p></div>
             <div class="process-step"><div class="step-number">3</div><h4 data-i18n="process.index.step3">Работа в цехе</h4><p data-i18n="process.index.step3.desc">Оклейка, реставрация или сервис — всё в стерильном цехе.</p></div>
@@ -143,9 +142,9 @@
     </section>
 
     <!-- Отзывы -->
-    <section class="reviews anim anim-up">
+    <section class="reviews">
         <h2 data-i18n="reviews.title">Отзывы наших клиентов</h2>
-        <div class="review-cards" data-anim-children="up">
+        <div class="review-cards">
             <div class="review-card">
                 <div class="review-stars">★★★★★</div>
                 <p class="review-text" data-i18n="review.index.1">«Лучший сервис в Дубае! Оклеили Range Rover плёнкой XPEL — машина как новая.»</p>
@@ -188,7 +187,7 @@
         </div>
     </section>
 
-    <section class="map-section anim anim-up">
+    <section class="map-section">
     <div class="container">
         <h2 class="section-title" data-i18n="map.title" style="margin-bottom: 30px;">Где нас найти</h2>
         <div class="map-container" style="border-radius: 16px; overflow: hidden;">

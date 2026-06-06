@@ -20,8 +20,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://www.gstatic.com">
-    <link rel="dns-prefetch" href="https://www.gstatic.com">
     <link rel="stylesheet" href="styles/style.css">
     <style>
         /* Custom select styling for contact service select */
@@ -113,20 +111,21 @@
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
     </style>
+<script>setTimeout(function(){var p=document.getElementById("preloader");if(p){p.style.opacity="0";setTimeout(function(){p.remove()},500)}},3000);</script>
 </head>
 <body>
     <!-- Header -->
     <div id="header-container"></div>
 
     <!-- Contacts Section -->
-    <section class="contacts anim anim-up">
+    <section class="contacts">
         <div class="container">
             <h1 class="section-title" data-i18n="contacts.title">Контакты</h1>
             <p class="section-subtitle" data-i18n="contacts.subtitle">Свяжитесь с нами любым удобным способом</p>
 
             <div class="contacts-grid">
                 <!-- Left Column - Contact Info -->
-                <div class="contacts-info anim anim-left">
+                <div class="contacts-info">
                     <div class="contact-item">
                         <div class="contact-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +183,7 @@
                 </div>
 
                 <!-- Right Column - Contact Form -->
-                <div class="contacts-form anim anim-right">
+                <div class="contacts-form">
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="contact-name" data-i18n="contacts.form.name">Ваше имя</label>
@@ -229,7 +228,7 @@
     </section>
 
     <!-- Map Section -->
-    <section class="map-section anim anim-up">
+    <section class="map-section">
         <div class="container">
             <div class="map-wrapper">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.16835!2d55.204063!3d25.136517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA4JzExLjUiTiA1NcKwMTInMTQuNiJF!5e0!3m2!1sru!2sae!4v1700000000000!5m2!1sru!2sae" width="100%" height="450" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

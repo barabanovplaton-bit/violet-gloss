@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -21,7 +22,6 @@
 html {
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
-    /* overflow-x: clip — более строгий вариант для современных браузеров */
     overflow-x: clip;
 }
 body {
@@ -29,9 +29,7 @@ body {
     overflow-wrap: break-word;
     overflow-x: hidden;
     overflow-x: clip;
-    /* Запрещаем горизонтальный свайп на мобильных */
     touch-action: pan-y;
-    -webkit-overflow-scrolling: touch;
 }
 img, video, iframe {
     max-width: 100%;
@@ -54,6 +52,7 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    padding-top: 80px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -65,6 +64,12 @@ h1, h2, h3, h4, h5 {
     display: flex;
     align-items: center;
     gap: 32px;
+    visibility: hidden;
+    pointer-events: none;
+}
+.nav.nav-open {
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .nav-link {
@@ -278,11 +283,10 @@ h1, h2, h3, h4, h5 {
     border-radius: var(--radius);
     padding: 40px 30px;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
     border: 1px solid transparent;
     display: flex;
     flex-direction: column;
-    cursor: default;
 }
 .service-card:hover {
     transform: translateY(-4px);
@@ -836,8 +840,10 @@ h1, h2, h3, h4, h5 {
 
 /* ===== ШАПКА (контейнер + sticky) ===== */
 #header-container {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     background: rgba(250, 249, 246, 0.8);
     backdrop-filter: blur(20px);
@@ -970,36 +976,37 @@ body.no-scroll {
         height: 56px;
     }
 
+    body {
+        padding-top: 56px;
+    }
+
     .nav {
         position: fixed;
         top: 0;
         right: 0;
         left: auto;
-        width: 100%;
-        max-width: none;
+        width: 85%;
+        max-width: 360px;
         height: 100vh;
         height: 100dvh;
         background: var(--milk);
         flex-direction: column;
         align-items: stretch;
-        padding: 0 24px env(safe-area-inset-bottom, 32px);
+        padding: 0 20px env(safe-area-inset-bottom, 32px);
         z-index: 1001;
         overflow-y: auto;
         overflow-x: hidden;
+        overscroll-behavior: contain;
         gap: 0;
         transform: translateX(100%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 0;
-        visibility: hidden;
-        pointer-events: none;
+        border-radius: 20px 0 0 20px;
     }
     [data-theme="dark"] .nav {
         background: #1E1E1E;
     }
     .nav.nav-open {
         transform: translateX(0);
-        visibility: visible;
-        pointer-events: auto;
     }
 
     /* Ссылки навигации в мобильном меню */
@@ -1087,14 +1094,6 @@ body.no-scroll {
         height: 36px;
         padding: 8px 6px;
     }
-
-    /* Скрываем бургер-кнопку когда меню открыто */
-    .nav-open ~ .mobile-toggle,
-    body.no-scroll .mobile-toggle {
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-    }
     .burger-icon span {
         height: 2.5px;
     }
@@ -1127,6 +1126,45 @@ body.no-scroll {
     .nav.nav-open > *:nth-child(8) { transition-delay: 0.32s; }
 }
 
+/* ===== ОТКЛЮЧЕНИЕ HOVER-АНИМАЦИЙ НА ТАЧ-УСТРОЙСТВАХ ===== */
+@media (hover: none) {
+    .btn-primary:hover,
+    .btn-secondary:hover {
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        transform: none;
+    }
+    .service-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+        border-color: transparent;
+    }
+    .pricing-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+    }
+    .pricing-card:hover::after {
+        width: 0;
+    }
+    .trust-item:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+        border-color: transparent;
+    }
+    .trust-item:hover .trust-line {
+        width: 0;
+    }
+    .partner-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+    }
+    .partner-card:hover::after {
+        width: 0;
+    }
+    .user-avatar:hover {
+        box-shadow: none;
+    }
+}
+
 /* Планшетный breakpoint: показываем бургер, десктоп навигацию убираем */
 @media (max-width: 900px) and (min-width: 769px) {
     .mobile-toggle {
@@ -1139,31 +1177,27 @@ body.no-scroll {
         top: 0;
         right: 0;
         left: auto;
-        width: 100%;
-        max-width: none;
+        width: 85%;
+        max-width: 400px;
         height: 100vh;
         height: 100dvh;
         background: var(--milk);
         flex-direction: column;
         align-items: stretch;
-        padding: 0 32px env(safe-area-inset-bottom, 32px);
+        padding: 0 28px env(safe-area-inset-bottom, 32px);
         z-index: 1001;
         overflow-y: auto;
-        overflow-x: hidden;
+        overscroll-behavior: contain;
         gap: 0;
         transform: translateX(100%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 0;
-        visibility: hidden;
-        pointer-events: none;
+        border-radius: 20px 0 0 20px;
     }
     [data-theme="dark"] .nav {
         background: #1E1E1E;
     }
     .nav.nav-open {
         transform: translateX(0);
-        visibility: visible;
-        pointer-events: auto;
     }
     .nav .nav-link {
         display: block;
@@ -1242,6 +1276,11 @@ body.no-scroll {
     .mobile-user-block,
     .mobile-auth-buttons {
         display: none !important;
+    }
+    /* Desktop nav always visible */
+    .nav {
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 }
 input:-webkit-autofill,
@@ -1491,44 +1530,7 @@ input:-webkit-autofill:active {
     flex-shrink: 0;
 }
 
-/* ===== АНИМАЦИИ ПОЯВЛЕНИЯ (scroll-triggered, play once) ===== */
-.anim {
-    opacity: 0;
-    transition: opacity 0.7s ease, transform 0.7s ease;
-    will-change: opacity, transform;
-}
-.anim-up {
-    transform: translateY(40px);
-}
-.anim-left {
-    transform: translateX(-40px);
-}
-.anim-right {
-    transform: translateX(40px);
-}
-.anim-scale {
-    transform: scale(0.92);
-}
-.anim.visible {
-    opacity: 1;
-    transform: translateY(0) translateX(0) scale(1);
-}
-
-/* Stagger delays for children inside [data-anim-children] */
-.anim.d1 { transition-delay: 0.05s; }
-.anim.d2 { transition-delay: 0.10s; }
-.anim.d3 { transition-delay: 0.15s; }
-.anim.d4 { transition-delay: 0.20s; }
-.anim.d5 { transition-delay: 0.25s; }
-.anim.d6 { transition-delay: 0.30s; }
-.anim.d7 { transition-delay: 0.35s; }
-.anim.d8 { transition-delay: 0.40s; }
-.anim.d9 { transition-delay: 0.45s; }
-.anim.d10 { transition-delay: 0.50s; }
-.anim.d11 { transition-delay: 0.55s; }
-.anim.d12 { transition-delay: 0.60s; }
-
-/* Legacy .reveal kept for backward compat */
+/* ===== АНИМАЦИИ ПОЯВЛЕНИЯ ===== */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -1724,20 +1726,19 @@ input:-webkit-autofill:active {
     .profile-main {
         flex: 1;
         margin-left: 260px;
-        padding: 40px 60px 40px 100px;
+        padding: 40px 60px;
         min-width: 0;
     }
     .profile-section {
-        display: block !important;
-        margin-bottom: 40px;
+        display: none;
     }
-    .profile-section:last-of-type {
-        margin-bottom: 0;
+    .profile-section.active {
+        display: block;
     }
     .profile-bottom-bar {
         display: none !important;
     }
-    .profile-mobile-topbar {
+    .profile-footer-actions {
         display: none !important;
     }
     .profile-mobile-close {
@@ -1754,20 +1755,87 @@ input:-webkit-autofill:active {
         flex-direction: column;
     }
     .profile-main {
-        padding: 16px 20px;
-        padding-bottom: 60px;
+        padding: 16px;
+        padding-bottom: 80px;
     }
-    /* На мобильных показываем ВСЕ секции (scrollable) */
     .profile-section {
-        display: block !important;
-        margin-bottom: 24px;
+        display: none;
+    }
+    .profile-section.active {
+        display: block;
+    }
+    .profile-footer-actions {
+        display: none !important;
     }
     .profile-mobile-close {
-        display: none !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+        margin-bottom: 16px;
     }
-    /* Скрываем нижнюю панель навигации на мобильных — scrollable вместо неё */
+    .profile-mobile-close .close-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .profile-mobile-close .close-btn svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--text-dark);
+        stroke-width: 2;
+    }
+    .profile-mobile-close .close-title {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 500;
+        font-size: 1.2rem;
+        color: var(--text-dark);
+    }
     .profile-bottom-bar {
-        display: none !important;
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border-top: 1px solid rgba(0,0,0,0.06);
+        padding: 8px 0;
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+        z-index: 100;
+        justify-content: space-around;
+    }
+    [data-theme="dark"] .profile-bottom-bar {
+        background: #1E1E1E;
+        border-top-color: rgba(255,255,255,0.06);
+    }
+    .profile-tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        color: var(--text-gray);
+        transition: color 0.2s;
+        border: none;
+        background: transparent;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+    }
+    .profile-tab-item.active {
+        color: var(--accent);
+    }
+    .profile-tab-icon {
+        width: 22px;
+        height: 22px;
+    }
+    .profile-tab-label {
+        font-size: 0.65rem;
+        font-weight: 500;
     }
 }
 
@@ -1777,16 +1845,10 @@ input:-webkit-autofill:active {
     margin: 0 auto;
     padding: 40px 24px;
 }
-/* По умолчанию мобильная кнопка выхода и desktop-logout скрыты */
-.profile-mobile-logout,
-.profile-desktop-logout {
-    display: none;
-}
 
-/* ВАЖНО: секции видны все, скроллим целиком */
+/* ВАЖНО: по умолчанию секции скрыты, видна только .active */
 .profile-section {
-    display: block;
-    margin-bottom: 40px;
+    display: none;
 }
 .profile-section.active {
     display: block;
@@ -2069,62 +2131,23 @@ input:-webkit-autofill:active {
 }
 .sms-box .code-inputs input:focus { border-color: var(--accent); outline: none; }
 
-/* Кнопка выхода — outline красная с SVG иконкой */
+/* Кнопка выхода */
 .logout-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
     background: transparent;
-    border: 2px solid #E53935;
-    color: #E53935;
+    border: 1px solid var(--text-dark);
+    color: var(--text-dark);
     padding: 12px 28px;
     border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.3s;
     margin-top: 20px;
     width: 100%;
-    font-family: 'Inter', sans-serif;
-}
-.logout-btn svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    transition: stroke 0.25s ease;
 }
 .logout-btn:hover {
-    background: #E53935;
-    border-color: #E53935;
+    background: var(--accent);
+    border-color: var(--accent);
     color: white;
-}
-.logout-btn:hover svg {
-    stroke: white;
-}
-.logout-btn-red {
-    background: transparent !important;
-    color: #e53935 !important;
-    border: 2px solid #e53935 !important;
-    padding: 14px 28px !important;
-    font-size: 1rem !important;
-    font-weight: 600 !important;
-    border-radius: 12px !important;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    transition: all 0.3s;
-    letter-spacing: 0.02em;
-}
-.logout-btn-red:hover {
-    background: #e53935 !important;
-    color: white !important;
-    border-color: #e53935 !important;
-    box-shadow: 0 4px 14px rgba(229,57,53,0.3);
-}
-.logout-btn-red:active {
-    background: #c62828 !important;
-    border-color: #c62828 !important;
 }
 
 /* Профиль: действия внизу страницы (кнопки домой + выход) */
@@ -2870,7 +2893,7 @@ select {
     }
     .profile-main {
         padding: 16px;
-        padding-bottom: 40px;
+        padding-bottom: 80px;
     }
     .profile-avatar-area {
         flex-direction: column;
@@ -2879,14 +2902,15 @@ select {
     .language-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    /* Мобильный профиль: показываем ВСЕ секции (scrollable) */
+    /* Мобильный профиль: показываем только активную секцию */
     .profile-section {
-        display: block !important;
+        display: none;
         margin-bottom: 24px;
     }
-    .profile-bottom-bar {
-        display: none !important;
+    .profile-section.active {
+        display: block;
     }
+    
     /* Auth pages */
     .auth-card {
         padding: 30px 24px;
@@ -2954,19 +2978,22 @@ select {
         display: none;
     }
 
-    /* Профиль: скрываем боковую панель, все секции видны */
+    /* Профиль: скрываем боковую панель, показываем нижнюю панель */
     .profile-sidebar {
         display: none !important;
     }
     .profile-bottom-bar {
-        display: none !important;
+        display: flex;
     }
     .profile-main {
-        padding-bottom: 40px;
+        padding-bottom: 90px;
     }
-    /* На мобильном показываем ВСЕ секции */
+    /* На мобильном показываем только активную секцию */
     .profile-section {
-        display: block !important;
+        display: none;
+    }
+    .profile-section.active {
+        display: block;
     }
 }
 
@@ -3150,56 +3177,149 @@ select {
     font-size: 0.95rem;
 }
 
-/* ===== МОБИЛЬНЫЙ ТОПБАР НА СТРАНИЦЕ ПРОФИЛЯ ===== */
-.profile-mobile-topbar {
+/* ===== МОБИЛЬНЫЙ ХЕДЕР НА СТРАНИЦЕ ПРОФИЛЯ ===== */
+.profile-mobile-header {
     display: none;
     align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
-    background: var(--white);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 48px;
+    background: var(--milk);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 1000;
 }
-[data-theme="dark"] .profile-mobile-topbar {
-    background: #1E1E1E;
+[data-theme="dark"] .profile-mobile-header {
+    background: #121212;
     border-bottom-color: rgba(255,255,255,0.06);
 }
-.profile-mobile-topbar .back-btn {
+.profile-mobile-header-logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+.profile-mobile-header-logo .char-g {
+    color: var(--accent);
+}
+.profile-burger-btn {
     width: 36px;
     height: 36px;
-    border-radius: 50%;
     border: none;
-    background: var(--milk);
+    background: transparent;
+    cursor: pointer;
+    padding: 8px 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    color: var(--text-dark);
-    transition: background 0.2s;
-    text-decoration: none;
-    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
 }
-.profile-mobile-topbar .back-btn:hover {
-    background: rgba(255,90,0,0.1);
-    color: var(--accent);
+.profile-burger-btn .burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
 }
-.profile-mobile-topbar .topbar-title {
-    font-family: 'Manrope', sans-serif;
-    font-weight: 500;
-    font-size: 1.2rem;
-    color: var(--text-dark);
+.profile-burger-btn .burger-icon span {
+    display: block;
+    width: 100%;
+    height: 2.5px;
+    background: var(--text-dark);
+    border-radius: 4px;
 }
 
-/* Показываем мобильный топбар профиля только на мобильных */
+/* Навигационная панель профиля (side-in справа) */
+.profile-nav-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85%;
+    max-width: 360px;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--milk);
+    z-index: 1002;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px 0 0 20px;
+    padding: 0 20px env(safe-area-inset-bottom, 32px);
+}
+[data-theme="dark"] .profile-nav-panel {
+    background: #1E1E1E;
+}
+.profile-nav-panel.nav-open {
+    transform: translateX(0);
+}
+.profile-nav-close {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 48px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0 16px;
+}
+.profile-nav-close svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-dark);
+    stroke-width: 2;
+}
+.profile-nav-panel a {
+    display: block;
+    padding: 16px 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: color 0.2s, padding-left 0.2s;
+}
+[data-theme="dark"] .profile-nav-panel a {
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+.profile-nav-panel a:hover {
+    color: var(--accent);
+    padding-left: 8px;
+}
+/* Оверлей для навигации профиля */
+.profile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: rgba(0,0,0,0.7);
+    z-index: 1001;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.profile-nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Показываем мобильный хедер профиля только на мобильных */
 @media (max-width: 900px) {
-    .profile-mobile-topbar {
+    .profile-mobile-header {
         display: flex;
     }
 }
 @media (min-width: 901px) {
-    .profile-mobile-topbar {
+    .profile-mobile-header {
         display: none !important;
     }
 }

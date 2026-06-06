@@ -17,8 +17,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио работ — Violet Gloss</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://www.gstatic.com">
-    <link rel="dns-prefetch" href="https://www.gstatic.com">
     <link rel="stylesheet" href="styles/style.css">
     <style>
         .portfolio-section {
@@ -148,12 +146,17 @@
                 height: auto;
             }
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
+<script>setTimeout(function(){var p=document.getElementById("preloader");if(p){p.style.opacity="0";setTimeout(function(){p.remove()},500)}},3000);</script>
 </head>
 <body>
     <div id="header-container"></div>
 
-    <section class="portfolio-section anim anim-up">
+    <section class="portfolio-section">
         <h2 data-i18n="portfolio.title">Наши работы</h2>
         <p class="portfolio-subtitle" data-i18n="portfolio.subtitle">Результаты до и после по каждому направлению</p>
 
@@ -164,7 +167,7 @@
             <button class="filter-btn" data-filter="interior" data-i18n="filter.interior_portfolio">Интерьер</button>
         </div>
 
-        <div class="portfolio-grid" data-anim-children="up">
+        <div class="portfolio-grid">
             <div class="portfolio-card" data-category="wrapping">
                 <div class="card-images">
                     <img src="https://placehold.co/600x400/1E1E1E/FFFFFF?text=До" alt="До оклейки Porsche">
@@ -285,10 +288,9 @@
                 cards.forEach(card => {
                     if (filter === 'all' || card.dataset.category === filter) {
                         card.style.display = 'flex';
-                        // Re-trigger anim
-                        card.classList.remove('visible');
+                        card.style.animation = 'none';
                         card.offsetHeight;
-                        card.classList.add('visible');
+                        card.style.animation = 'fadeInUp 0.5s forwards';
                     } else {
                         card.style.display = 'none';
                     }

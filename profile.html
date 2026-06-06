@@ -20,8 +20,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://www.gstatic.com">
-    <link rel="dns-prefetch" href="https://www.gstatic.com">
     <link rel="stylesheet" href="styles/style.css">
     <style>
         .notification-toggle-container {
@@ -214,15 +212,39 @@
             transform: translateX(24px);
         }
     </style>
+<script>setTimeout(function(){var p=document.getElementById("preloader");if(p){p.style.opacity="0";setTimeout(function(){p.remove()},500)}},3000);</script>
 </head>
 <body>
-    <!-- Мобильный топбар (стрелка назад + «Настройки») -->
-    <div class="profile-mobile-topbar" id="profile-mobile-topbar">
-        <a href="index.html" class="back-btn" aria-label="Назад" onclick="event.preventDefault();history.back();">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+    <!-- Мобильный хедер с бургером (виден только на мобилке) -->
+    <div class="profile-mobile-header">
+        <a href="index.html" class="profile-mobile-header-logo">
+            <span class="char-v">V</span><span class="char-g">G</span>
         </a>
-        <span class="topbar-title" data-i18n="profile.settings">Настройки</span>
+        <button class="profile-burger-btn" id="profile-burger-btn" aria-label="Menu">
+            <div class="burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
     </div>
+
+    <!-- Навигационная панель (side-in справа, только мобилка) -->
+    <div class="profile-nav-panel" id="profile-nav-panel">
+        <button class="profile-nav-close" id="profile-nav-close" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <a href="index.html">Главная</a>
+        <a href="services.html">Услуги</a>
+        <a href="portfolio.html">Портфолио</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="reviews.html">Отзывы</a>
+    </div>
+    <div class="profile-nav-overlay" id="profile-nav-overlay"></div>
 
     <div class="profile-layout">
 
@@ -267,6 +289,17 @@
 
         <!-- ===== MAIN CONTENT ===== -->
         <main class="profile-main">
+
+            <!-- Мобильный крестик закрытия (только на мобильных) -->
+            <div class="profile-mobile-close">
+                <span class="close-title" data-i18n="profile.settings">Настройки</span>
+                <button class="close-btn" onclick="history.back()" aria-label="Close">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
 
             <!-- Section 1: Account -->
             <div id="section-account" class="profile-section active">
@@ -337,6 +370,11 @@
                     </div>
 
                     <button class="btn-primary" id="btn-save-profile" data-i18n="profile.save">Сохранить изменения</button>
+                </div>
+
+                <!-- Кнопка выхода из аккаунта (внутри секции Аккаунт) -->
+                <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.06);">
+                    <button class="logout-btn" id="btn-logout" data-i18n="profile.logout">Выйти из аккаунта</button>
                 </div>
 
             </div>
@@ -430,14 +468,6 @@
                         <div class="theme-toggle notification-toggle" data-key="pushNotifications" role="switch" aria-checked="false" tabindex="0"></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Кнопка выхода из аккаунта (внизу всех секций, и ПК и мобильная) -->
-            <div class="profile-footer-actions">
-                <button class="logout-btn logout-btn-red" id="btn-logout" data-i18n="profile.logout">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                    <span data-i18n="profile.logout">Выйти из аккаунта</span>
-                </button>
             </div>
 
         </main>
@@ -756,47 +786,61 @@ if (languageSelect) languageSelect.value = savedLang;
             document.getElementById('email-verify-overlay').style.display = 'none';
         });
 
-        // ─── Navigation: Sidebar (PC) — все секции видны, кнопки = якоря ───
+        // ─── Navigation: Sidebar (PC) + Bottom Tab Bar (mobile) ───
         const sections = document.querySelectorAll('.profile-section');
+        const bottomTabs = document.querySelectorAll('.profile-tab-item');
         const sidebarLinks = document.querySelectorAll('.profile-sidebar-nav a[data-section]');
 
         function switchSection(targetId) {
+            // Update bottom tab active state
+            bottomTabs.forEach(t => t.classList.remove('active'));
+            bottomTabs.forEach(t => {
+                if (t.dataset.section === targetId) t.classList.add('active');
+            });
+
             // Update sidebar active state
             sidebarLinks.forEach(l => l.classList.remove('active'));
             sidebarLinks.forEach(l => {
                 if (l.dataset.section === targetId) l.classList.add('active');
             });
 
-            // All sections are always visible — just scroll to target
+            // Switch sections
+            sections.forEach(s => {
+                if (s.id === targetId) {
+                    s.style.opacity = '0';
+                    s.style.transform = 'translateY(10px)';
+                    s.classList.add('active');
+                    requestAnimationFrame(() => {
+                        s.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        s.style.opacity = '1';
+                        s.style.transform = 'translateY(0)';
+                    });
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+
+            // Scroll to top of the section
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
-        // Sidebar link clicks (PC) — якорные ссылки
+        // Bottom tab clicks (mobile)
+        bottomTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                switchSection(tab.dataset.section);
+            });
+        });
+
+        // Sidebar link clicks (PC)
         sidebarLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 switchSection(link.dataset.section);
             });
         });
-
-        // Intersection Observer: подсветка сайдбара при скролле
-        const profileMain = document.querySelector('.profile-main');
-        if (profileMain && window.innerWidth > 900) {
-            const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        sidebarLinks.forEach(l => l.classList.remove('active'));
-                        const activeLink = document.querySelector(`.profile-sidebar-nav a[data-section="${entry.target.id}"]`);
-                        if (activeLink) activeLink.classList.add('active');
-                    }
-                });
-            }, observerOptions);
-            sections.forEach(s => sectionObserver.observe(s));
-        }
 
         // ─── Theme Select ───
         function applyThemeValue(value) {
@@ -1034,21 +1078,20 @@ if (languageSelect) {
         });
 
         // ─── Logout ───
-        function doLogout() {
-            return async () => {
-                try {
-                    await signOut(auth);
-                    localStorage.setItem('vg-theme', 'light');
-                    localStorage.setItem('vg-language', 'en');
-                    document.documentElement.removeAttribute('data-theme');
-                    if (window.applyLanguage) window.applyLanguage('en');
-                    window.location.href = 'index.html';
-                } catch (err) {
-                    showToast(window.t ? window.t('profile.error.logout') : 'Ошибка при выходе', 'error');
-                }
-            };
-        }
-        btnLogout.addEventListener('click', doLogout());
+        btnLogout.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                // Сбросить настройки на гостевые
+                localStorage.setItem('vg-theme', 'light');
+                localStorage.setItem('vg-language', 'en');
+                document.documentElement.removeAttribute('data-theme');
+                if (window.applyLanguage) window.applyLanguage('en');
+                window.location.href = 'index.html';
+            } catch (err) {
+                showToast(window.t ? window.t('profile.error.logout') : 'Ошибка при выходе', 'error');
+            }
+        });
+        
 
         // ─── Change Password ───
         document.getElementById('btn-change-password').addEventListener('click', async () => {
@@ -1177,6 +1220,68 @@ if (languageSelect) {
             }, 300);
         });
 
+        // ===== Профиль: мобильный бургер-меню =====
+        (function() {
+            const burgerBtn = document.getElementById('profile-burger-btn');
+            const navPanel = document.getElementById('profile-nav-panel');
+            const navOverlay = document.getElementById('profile-nav-overlay');
+            const navClose = document.getElementById('profile-nav-close');
+
+            if (!burgerBtn || !navPanel) return;
+
+            function openProfileNav() {
+                navPanel.classList.add('nav-open');
+                if (navOverlay) navOverlay.classList.add('active');
+                document.body.classList.add('no-scroll');
+            }
+
+            function closeProfileNav() {
+                navPanel.classList.remove('nav-open');
+                if (navOverlay) navOverlay.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+
+            burgerBtn.addEventListener('click', openProfileNav);
+
+            if (navClose) {
+                navClose.addEventListener('click', closeProfileNav);
+            }
+
+            if (navOverlay) {
+                navOverlay.addEventListener('click', closeProfileNav);
+            }
+
+            // Закрыть при клике на ссылку внутри панели
+            navPanel.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', closeProfileNav);
+            });
+
+            // Свайп влево для закрытия
+            var touchStartX = 0;
+            document.addEventListener('touchstart', function(e) {
+                if (navPanel.classList.contains('nav-open')) {
+                    touchStartX = e.changedTouches[0].screenX;
+                }
+            }, { passive: true });
+            document.addEventListener('touchend', function(e) {
+                if (navPanel.classList.contains('nav-open')) {
+                    var diff = touchStartX - e.changedTouches[0].screenX;
+                    if (diff > 60) closeProfileNav();
+                }
+            }, { passive: true });
+
+            // Escape для закрытия
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navPanel.classList.contains('nav-open')) {
+                    closeProfileNav();
+                }
+            });
+
+            // При увеличении экрана — закрыть
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 900) closeProfileNav();
+            });
+        })();
     </script>
 </body>
 </html>

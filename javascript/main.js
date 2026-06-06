@@ -32,13 +32,16 @@ function initTheme() {
 initTheme();
 
 /* ===== ПРЕЛОАДЕР ===== */
-window.addEventListener('load', () => {
+function hidePreloader() {
     const preloader = document.getElementById('preloader');
     if (preloader) {
         preloader.style.opacity = '0';
         setTimeout(() => preloader.remove(), 500);
     }
-});
+}
+window.addEventListener('load', hidePreloader);
+// Fallback: убираем прелоадер через 4 секунды даже если что-то не загрузилось
+setTimeout(hidePreloader, 4000);
 
 /* ===== TOAST УВЕДОМЛЕНИЯ ===== */
 function showToast(message, type = 'success') {
@@ -53,46 +56,20 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-/* ===== REVEAL / SCROLL АНИМАЦИИ (play once) ===== */
+/* ===== REVEAL АНИМАЦИИ ===== */
 function initRevealAnimations() {
-    // Legacy .reveal support
     const reveals = document.querySelectorAll('.reveal');
-    if (reveals.length) {
-        const legacyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-        reveals.forEach(el => legacyObserver.observe(el));
-    }
+    if (!reveals.length) return;
 
-    // New .anim system with once-only and staggered children
-    const animEls = document.querySelectorAll('.anim');
-    if (!animEls.length) return;
-
-    const animObserver = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                animObserver.unobserve(entry.target); // Play once only
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.15 });
 
-    animEls.forEach(el => animObserver.observe(el));
-
-    // Auto-stagger children inside [data-anim-children] containers
-    document.querySelectorAll('[data-anim-children]').forEach(container => {
-        const type = container.dataset.animChildren || 'up'; // up, left, right, scale
-        const children = container.children;
-        Array.from(children).forEach((child, i) => {
-            if (i >= 12) return; // max 12 stagger slots
-            child.classList.add('anim', `anim-${type}`, `d${i + 1}`);
-            animObserver.observe(child);
-        });
-    });
+    reveals.forEach(el => observer.observe(el));
 }
 
 /* ===== КАСТОМНЫЙ ВЫПАДАЮЩИЙ СПИСОК ===== */
@@ -292,7 +269,14 @@ function renderHeader() {
         </button>
     </header>
     `;
-    // Overlay removed — burger menu is now full-screen, no overlay needed
+    // Create overlay OUTSIDE header-container to avoid z-index stacking issues
+    let navOverlay = document.getElementById('nav-overlay');
+    if (!navOverlay) {
+        navOverlay = document.createElement('div');
+        navOverlay.className = 'nav-overlay';
+        navOverlay.id = 'nav-overlay';
+        container.parentNode.insertBefore(navOverlay, container.nextSibling);
+    };
 
     const authContainer = document.getElementById('auth-buttons');
     const mobileUserBlock = document.getElementById('mobile-user-block');
@@ -377,18 +361,33 @@ function renderHeader() {
 
     onAuthStateChanged(auth, updateAuthUI);
 
-    // ===== МОБИЛЬНОЕ МЕНЮ (slide-in справа, на весь экран, без overlay) =====
+    // ===== МОБИЛЬНОЕ МЕНЮ (slide-in + overlay, бургер БЕЗ анимации в X) =====
     const mobileToggle = document.getElementById('mobile-toggle');
     const mainNav = document.getElementById('main-nav');
+    const navOverlay = document.getElementById('nav-overlay');
+
+    let scrollY = 0;
 
     function openMenu() {
+        scrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
         mainNav.classList.add('nav-open');
+        navOverlay.classList.add('active');
         document.body.classList.add('no-scroll');
     }
 
     function closeMenu() {
         mainNav.classList.remove('nav-open');
+        navOverlay.classList.remove('active');
         document.body.classList.remove('no-scroll');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
     }
 
     if (mobileToggle && mainNav) {
@@ -403,6 +402,11 @@ function renderHeader() {
         const closeBtn = document.getElementById('nav-close-btn');
         if (closeBtn) {
             closeBtn.addEventListener('click', closeMenu);
+        }
+
+        // Клик по overlay — закрыть
+        if (navOverlay) {
+            navOverlay.addEventListener('click', closeMenu);
         }
 
         // Закрыть меню при клике на любую ссылку внутри nav
@@ -524,7 +528,6 @@ const translations = {
         'services.title': 'Наши услуги',
         'services.subtitle': 'Полный спектр премиального детейлинга',
         // Profile
-        'profile.settings': 'Настройки',
         'profile.account': 'Аккаунт',
         'profile.personalization': 'Персонализация',
         'profile.security': 'Безопасность',
@@ -876,7 +879,6 @@ const translations = {
         'reviews.subtitle': 'What our clients say about us',
         'services.title': 'Our Services',
         'services.subtitle': 'Full range of premium detailing',
-        'profile.settings': 'Settings',
         'profile.account': 'Account',
         'profile.personalization': 'Personalization',
         'profile.security': 'Security',
