@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — Violet Gloss</title>
+    <meta name="description" content="Свяжитесь с Violet Gloss — премиальным детейлинг-центром в Дубае. Адрес, телефон, email, форма обратной связи.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Custom select styling for contact service select */
+        .contacts-form select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+        [data-theme="dark"] .contacts-form select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23aaa' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        }
+        .service-subcategory {
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--milk);
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            animation: slideDown 0.3s ease;
+        }
+        .service-subcategory label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .service-subcategory select {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            background: var(--white);
+            box-sizing: border-box;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+        .service-subcategory select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        [data-theme="dark"] .service-subcategory {
+            background: #252525;
+            border-color: #444;
+        }
+        [data-theme="dark"] .service-subcategory select {
+            background: #252525;
+            border-color: #444;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23aaa' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        }
+        [data-theme="dark"] .service-subcategory select option {
+            background: #252525;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2E7D32;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 9999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            animation: toastIn 0.3s ease;
+        }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Contacts Section -->
+    <section class="contacts anim anim-up">
+        <div class="container">
+            <h1 class="section-title" data-i18n="contacts.title">Контакты</h1>
+            <p class="section-subtitle" data-i18n="contacts.subtitle">Свяжитесь с нами любым удобным способом</p>
+
+            <div class="contacts-grid">
+                <!-- Left Column - Contact Info -->
+                <div class="contacts-info anim anim-left">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#FF5A00"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4 data-i18n="contacts.address">Адрес</h4>
+                            <p data-i18n="contacts.address.value2">Дубай, ОАЭ<br>Al Quoz Industrial Area 3</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.62 10.79C8.06 13.62 10.38 15.93 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.94C17.55 15.31 18.75 15.51 20 15.51C20.55 15.51 21 15.96 21 16.51V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z" fill="#FF5A00"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4 data-i18n="contacts.phone">Телефон</h4>
+                            <p><a href="tel:+971501234567">+971 50 123 4567</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="#FF5A00"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4 data-i18n="contacts.email">Email</h4>
+                            <p><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" fill="#FF5A00"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4 data-i18n="contacts.hours">Часы работы</h4>
+                            <p data-i18n="contacts.hours.value">Пн–Сб: 9:00–21:00<br>Вс: выходной</p>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/971501234567" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.472 14.382C17.247 14.269 16.189 13.749 15.983 13.674C15.777 13.599 15.627 13.562 15.477 13.787C15.327 14.012 14.914 14.494 14.783 14.644C14.652 14.794 14.521 14.813 14.296 14.7C14.071 14.587 13.367 14.334 12.536 13.599C11.889 13.022 11.452 12.312 11.321 12.087C11.19 11.862 11.308 11.741 11.421 11.629C11.522 11.528 11.646 11.366 11.759 11.235C11.872 11.104 11.909 11.01 11.984 10.86C12.059 10.71 12.022 10.579 11.965 10.466C11.909 10.353 11.455 9.293 11.268 8.843C11.081 8.393 10.875 8.468 10.744 8.468C10.613 8.468 10.463 8.449 10.313 8.449C10.163 8.449 9.919 8.505 9.713 8.73C9.507 8.955 8.911 9.513 8.911 10.572C8.911 11.632 9.732 12.654 9.845 12.804C9.958 12.954 11.435 15.204 13.735 16.174C14.283 16.411 14.713 16.553 15.047 16.659C15.596 16.834 16.095 16.809 16.489 16.753C16.926 16.69 17.838 16.194 18.025 15.655C18.212 15.116 18.212 14.658 18.156 14.564C18.1 14.47 17.95 14.414 17.725 14.301L17.472 14.382ZM12.037 21.75H12.018C10.094 21.75 8.188 21.234 6.525 20.259L6.131 20.025L2.681 20.925L3.6 17.55L3.347 17.137C2.266 15.413 1.694 13.428 1.694 11.391C1.694 5.891 6.262 1.322 12.047 1.322C14.85 1.322 17.484 2.416 19.452 4.384C21.42 6.352 22.514 8.987 22.514 11.791C22.495 17.291 17.927 21.75 12.037 21.75ZM20.55 3.285C18.15 0.885 14.959 -0.375 11.981 -0.375C5.362 -0.375 0 4.987 0 11.606C0 13.725 0.553 15.791 1.622 17.606L0 23.625L6.15 22.041C7.894 23.016 9.919 23.531 11.981 23.531H12C18.6 23.531 24 18.169 24 11.55C24 8.25 22.95 5.25 20.55 3.285Z"/>
+                        </svg>
+                        <span data-i18n="contacts.whatsapp">Написать в WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Right Column - Contact Form -->
+                <div class="contacts-form anim anim-right">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name" data-i18n="contacts.form.name">Ваше имя</label>
+                            <input type="text" id="contact-name" name="name" placeholder="Введите имя" data-i18n-ph="contacts.form.name.ph" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone" data-i18n="contacts.form.phone">Телефон</label>
+                            <input type="tel" id="contact-phone" name="phone" placeholder="+971 XX XXX XXXX" data-i18n-ph="contacts.form.phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" data-i18n="contacts.form.email">Email</label>
+                            <input type="email" id="contact-email" name="email" placeholder="email@example.com" data-i18n-ph="contacts.form.email">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-service" data-i18n="contacts.form.service">Услуга</label>
+                            <select id="contact-service" name="service">
+                                <option value="" data-i18n="contacts.form.service.placeholder">Выберите услугу</option>
+                                <option value="oil-change" data-i18n="contacts.form.service.oil-change">Замена масла</option>
+                                <option value="maintenance" data-i18n="contacts.form.service.maintenance">Техобслуживание</option>
+                                <option value="leather-restoration" data-i18n="contacts.form.service.leather-restoration">Реставрация кожи</option>
+                                <option value="tinting" data-i18n="contacts.form.service.tinting">Тонировка</option>
+                                <option value="soundproofing" data-i18n="contacts.form.service.soundproofing">Шумоизоляция</option>
+                                <option value="starry-sky" data-i18n="contacts.form.service.starry-sky">Звёздное небо</option>
+                                <option value="wrapping" data-i18n="contacts.form.service.wrapping">Оклейка кузова</option>
+                            </select>
+                        </div>
+                        <div id="service-subcategory" class="service-subcategory" style="display:none;">
+                            <label id="subcategory-label" data-i18n="contact.sub.type">Выберите тип</label>
+                            <select id="contact-subcategory">
+                                <option value="" data-i18n="contact.sub.choose">Выберите</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" data-i18n="contacts.form.message">Сообщение</label>
+                            <textarea id="contact-message" name="message" rows="4" placeholder="Опишите ваши пожелания..." data-i18n-ph="contacts.form.message.ph"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" data-i18n="contacts.form.submit">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section anim anim-up">
+        <div class="container">
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.16835!2d55.204063!3d25.136517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA4JzExLjUiTiA1NcKwMTInMTQuNiJF!5e0!3m2!1sru!2sae!4v1700000000000!5m2!1sru!2sae" width="100%" height="450" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Service subcategories logic -->
+    <script>
+        // Service subcategories - definitions use keys, translations applied at render time
+        const serviceSubcategoryDefs = {
+            'wrapping': {
+                labelKey: 'contact.sub.wrapping.label',
+                labelDefault: 'Тип плёнки',
+                options: [
+                    { value: 'ppf', key: 'contact.sub.wrapping.ppf', def: 'Гравийная плёнка (PPF)' },
+                    { value: 'vinyl', key: 'contact.sub.wrapping.vinyl', def: 'Виниловая плёнка' },
+                    { value: 'ceramic', key: 'contact.sub.wrapping.ceramic', def: 'Керамическое покрытие' }
+                ]
+            },
+            'tinting': {
+                labelKey: 'contact.sub.tinting.label',
+                labelDefault: 'Тип тонировки',
+                options: [
+                    { value: 'atermal', key: 'contact.sub.tinting.athermal', def: 'Атермальная плёнка' },
+                    { value: 'standard', key: 'contact.sub.tinting.standard', def: 'Стандартная тонировка' },
+                    { value: 'nano', key: 'contact.sub.tinting.nano', def: 'Нанопокрытие' }
+                ]
+            },
+            'starry-sky': {
+                labelKey: 'contact.sub.starry.label',
+                labelDefault: 'Вариант звёздного неба',
+                options: [
+                    { value: 'standard', key: 'contact.sub.starry.standard', def: 'Стандарт (400 нитей)' },
+                    { value: 'premium', key: 'contact.sub.starry.premium', def: 'Премиум (800 нитей)' },
+                    { value: 'exclusive', key: 'contact.sub.starry.exclusive', def: 'Эксклюзив (с метеорами)' }
+                ]
+            },
+            'leather-restoration': {
+                labelKey: 'contact.sub.leather.label',
+                labelDefault: 'Тип работы',
+                options: [
+                    { value: 'restoration', key: 'contact.sub.leather.restoration', def: 'Реставрация кожи' },
+                    { value: 'retrim', key: 'contact.sub.leather.retrim', def: 'Перешив салона' },
+                    { value: 'alcantara', key: 'contact.sub.leather.alcantara', def: 'Алькантара' }
+                ]
+            }
+        };
+
+        function t(key, fallback) {
+            return (window.t && window.t(key)) || fallback;
+        }
+
+        document.getElementById('contact-service').addEventListener('change', function() {
+            const subcategoryDiv = document.getElementById('service-subcategory');
+            const subcategorySelect = document.getElementById('contact-subcategory');
+            const subcategoryLabel = document.getElementById('subcategory-label');
+            
+            const def = serviceSubcategoryDefs[this.value];
+            if (def) {
+                subcategoryLabel.textContent = t(def.labelKey, def.labelDefault);
+                subcategorySelect.innerHTML = '<option value="">' + t('contact.sub.choose', 'Выберите') + '</option>';
+                def.options.forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt.value;
+                    option.textContent = t(opt.key, opt.def);
+                    subcategorySelect.appendChild(option);
+                });
+                subcategoryDiv.style.display = 'block';
+            } else {
+                subcategoryDiv.style.display = 'none';
+            }
+        });
+    </script>
+
+    <!-- Form submission handler -->
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Show success toast
+            const toast = document.createElement('div');
+            toast.className = 'toast success';
+            toast.textContent = window.t ? window.t('contact.form.success') : 'Заявка отправлена! Мы свяжемся с вами в ближайшее время.';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+            this.reset();
+            // Hide subcategory
+            document.getElementById('service-subcategory').style.display = 'none';
+        });
+    </script>
+
+    <!-- Auto-fill from user profile -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBk8SHgxCOYjIrFkixIFAoy_BRpWsIUd7w",
+            authDomain: "violet-gloss.firebaseapp.com",
+            projectId: "violet-gloss",
+            storageBucket: "violet-gloss.firebasestorage.app",
+            messagingSenderId: "330589029963",
+            appId: "1:330589029963:web:a4947df92909e6d045afce"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const userDoc = await getDoc(doc(db, 'users', user.uid));
+                    if (userDoc.exists()) {
+                        const data = userDoc.data();
+                        const nameInput = document.getElementById('contact-name');
+                        const phoneInput = document.getElementById('contact-phone');
+                        const emailInput = document.getElementById('contact-email');
+                        
+                        if (nameInput && data.name) nameInput.value = [data.name, data.surname].filter(Boolean).join(' ');
+                        if (phoneInput && data.phone) phoneInput.value = data.phone;
+                        if (emailInput && user.email) emailInput.value = user.email;
+                    }
+                } catch (err) {
+                    console.error('Error loading user data for contact form:', err);
+                }
+            }
+        });
+    </script>
+
+    <script type="module" src="javascript/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.initCustomSelects && window.initCustomSelects();
+        });
+    </script>
+</body>
+</html>

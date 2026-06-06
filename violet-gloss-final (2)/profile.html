@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль — Violet Gloss</title>
+    <meta name="description" content="Личный кабинет Violet Gloss — управляйте аккаунтом, персонализацией и безопасностью.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .notification-toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .notification-toggle-container:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        [data-theme="dark"] .notification-toggle-container {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .notification-toggle-label {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+        .notification-toggle-desc {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            margin-top: 2px;
+        }
+        .phone-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .phone-display span {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+        .btn-small {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        .btn-small:hover {
+            background: var(--accent-hover);
+        }
+        .btn-small:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .verification-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .verification-status.verified {
+            color: #2E7D32;
+        }
+        .verification-status.unverified {
+            color: var(--accent);
+        }
+        .optional-label {
+            font-weight: 400 !important;
+            color: var(--text-gray) !important;
+            font-size: 0.85rem !important;
+        }
+        .section-heading {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+        .password-strength {
+            height: 4px;
+            border-radius: 2px;
+            background: #e0e0e0;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .password-strength-bar {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s, background 0.3s;
+            width: 0;
+        }
+        .password-note {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            margin-top: -16px;
+        }
+        .email-verify-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            background: rgba(138, 43, 226, 0.06);
+            border: 1px solid rgba(138, 43, 226, 0.15);
+            margin-bottom: 24px;
+        }
+        [data-theme="dark"] .email-verify-banner {
+            background: rgba(138, 43, 226, 0.12);
+            border-color: rgba(138, 43, 226, 0.25);
+        }
+        .email-verify-banner .verify-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        .email-verify-banner .verify-info svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        .email-verify-banner.verified {
+            background: rgba(46, 125, 50, 0.06);
+            border-color: rgba(46, 125, 50, 0.15);
+        }
+        [data-theme="dark"] .email-verify-banner.verified {
+            background: rgba(46, 125, 50, 0.12);
+            border-color: rgba(46, 125, 50, 0.25);
+        }
+        .email-verify-banner.verified .verify-info {
+            color: #2E7D32;
+        }
+        /* Email verify overlay */
+        #email-verify-overlay.sms-overlay .sms-box {
+            text-align: center;
+        }
+        #email-verify-overlay .code-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        #email-verify-overlay .verify-digit {
+            width: 44px;
+            height: 52px;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: var(--milk);
+            color: var(--text-dark);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #email-verify-overlay .verify-digit:focus {
+            border-color: var(--accent);
+        }
+        [data-theme="dark"] #email-verify-overlay .verify-digit {
+            border-color: #444;
+            background: #252525;
+        }
+        [data-theme="dark"] #email-verify-overlay .verify-digit:focus {
+            border-color: var(--accent);
+        }
+        .avatar-crop-zoom {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .avatar-crop-zoom label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .avatar-crop-zoom input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+        .notification-toggle.active {
+            background: var(--accent) !important;
+        }
+        .notification-toggle.active::after {
+            transform: translateX(24px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Мобильный топбар (стрелка назад + «Настройки») -->
+    <div class="profile-mobile-topbar" id="profile-mobile-topbar">
+        <a href="index.html" class="back-btn" aria-label="Назад" onclick="event.preventDefault();history.back();">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+        </a>
+        <span class="topbar-title" data-i18n="profile.settings">Настройки</span>
+    </div>
+
+    <div class="profile-layout">
+
+        <!-- ===== SIDEBAR (ПК: вертикальный столбец слева) ===== -->
+        <aside class="profile-sidebar">
+            <a href="index.html" class="profile-sidebar-logo">
+                Violet <span class="accent">Gloss</span>
+            </a>
+            <ul class="profile-sidebar-nav">
+                <li>
+                    <a href="#" class="active" data-section="section-account">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <span data-i18n="profile.account">Аккаунт</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="section-personalization">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        <span data-i18n="profile.personalization">Персонализация</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="section-security">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <span data-i18n="profile.security">Безопасность</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="section-notifications">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span data-i18n="profile.notifications">Уведомления</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="profile-sidebar-footer">
+                <a href="index.html" style="display:flex;align-items:center;gap:12px;color:var(--text-gray);text-decoration:none;font-size:0.95rem;font-weight:500;padding:14px 0;transition:color 0.2s;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span data-i18n="profile.home">На главную</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="profile-main">
+
+            <!-- Section 1: Account -->
+            <div id="section-account" class="profile-section active">
+                <h2 class="section-heading" data-i18n="profile.account">Аккаунт</h2>
+
+                <!-- Avatar area -->
+                <div class="profile-avatar-area">
+                    <div class="profile-avatar" id="avatar-container">
+                        <svg id="avatar-default-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                        </svg>
+                        <img id="avatar-image" src="" alt="" style="display:none;border-radius:50%;">
+                        <div class="profile-avatar-upload" id="avatar-upload-trigger" data-i18n="profile.avatar.change">Изменить</div>
+                    </div>
+                    <input type="file" id="avatar-input" accept="image/*" style="display:none;">
+                    <div class="profile-avatar-info">
+                        <h3 id="display-name" data-i18n="profile.default_user">Пользователь</h3>
+                        <p id="display-email">email@example.com</p>
+                    </div>
+                </div>
+
+                <!-- Profile form -->
+                <div class="profile-card">
+                    <h3 data-i18n="profile.personal.data">Личные данные</h3>
+
+                    <div class="form-group">
+                        <label for="profile-name" data-i18n="profile.name">Имя</label>
+                        <input type="text" id="profile-name" placeholder="Ваше имя" data-i18n-ph="profile.name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-surname" data-i18n="profile.surname">Фамилия</label>
+                        <input type="text" id="profile-surname" placeholder="Ваша фамилия" data-i18n-ph="profile.surname">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-email">Email</label>
+                        <input type="email" id="profile-email" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-phone" data-i18n="profile.phone">Телефон</label>
+                        <input type="tel" id="profile-phone" placeholder="+971 XX XXX XXXX" data-i18n-ph="profile.phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label data-i18n="profile.birthday">Дата рождения</label>
+                        <div class="birthday-row">
+                            <select id="birth-day" style="flex:1;"><option value="" data-i18n="misc.day">День</option></select>
+                            <select id="birth-month" style="flex:1;">
+                                <option value="" data-i18n="misc.month">Месяц</option>
+                                <option value="01" data-i18n="month.01">Январь</option>
+                                <option value="02" data-i18n="month.02">Февраль</option>
+                                <option value="03" data-i18n="month.03">Март</option>
+                                <option value="04" data-i18n="month.04">Апрель</option>
+                                <option value="05" data-i18n="month.05">Май</option>
+                                <option value="06" data-i18n="month.06">Июнь</option>
+                                <option value="07" data-i18n="month.07">Июль</option>
+                                <option value="08" data-i18n="month.08">Август</option>
+                                <option value="09" data-i18n="month.09">Сентябрь</option>
+                                <option value="10" data-i18n="month.10">Октябрь</option>
+                                <option value="11" data-i18n="month.11">Ноябрь</option>
+                                <option value="12" data-i18n="month.12">Декабрь</option>
+                            </select>
+                            <select id="birth-year" style="flex:1;"><option value="" data-i18n="misc.year">Год</option></select>
+                        </div>
+                        <input type="hidden" id="profile-birthdate">
+                    </div>
+
+                    <button class="btn-primary" id="btn-save-profile" data-i18n="profile.save">Сохранить изменения</button>
+                </div>
+
+            </div>
+
+            <!-- Section 2: Personalization -->
+            <div id="section-personalization" class="profile-section">
+                <h2 class="section-heading" data-i18n="profile.personalization">Персонализация</h2>
+
+                <!-- Theme -->
+                <div class="profile-card">
+                    <h3 data-i18n="profile.theme.title">Тема оформления</h3>
+                    <div class="theme-select-container">
+                        <select id="theme-select" class="theme-select">
+                            <option value="light" data-i18n="profile.theme.light">Светлая</option>
+                            <option value="dark" data-i18n="profile.theme.dark">Тёмная</option>
+                            <option value="system" data-i18n="profile.theme.system">Системная</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Language -->
+                <div class="profile-card">
+                    <h3 data-i18n="profile.language.title">Язык интерфейса</h3>
+                    <div class="form-group">
+                        <label for="language-select" data-i18n="profile.language.select">Выберите язык</label>
+                        <select id="language-select" class="theme-select">
+                            <option value="ru">Русский</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Section 3: Security -->
+            <div id="section-security" class="profile-section">
+                <h2 class="section-heading" data-i18n="profile.security">Безопасность</h2>
+
+                <!-- Change password -->
+                <div class="profile-card">
+                    <h3 data-i18n="profile.password.change">Смена пароля</h3>
+                    <p class="password-note" data-i18n="profile.password.note">Для смены пароля необходимо подтвердить текущий пароль</p>
+                    <div class="form-group">
+                        <label for="current-password" data-i18n="profile.password.current">Текущий пароль</label>
+                        <input type="password" id="current-password" placeholder="Введите текущий пароль" data-i18n-ph="profile.password.current.ph">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password" data-i18n="profile.password.new">Новый пароль</label>
+                        <input type="password" id="new-password" placeholder="Минимум 6 символов" data-i18n-ph="profile.password.new.ph">
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="password-strength-bar"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password" data-i18n="profile.password.confirm">Подтвердите новый пароль</label>
+                        <input type="password" id="confirm-password" placeholder="Повторите новый пароль" data-i18n-ph="profile.password.confirm.ph">
+                    </div>
+                    <button class="btn-primary" id="btn-change-password" data-i18n="profile.password.change">Сменить пароль</button>
+                </div>
+
+            </div>
+
+            <!-- Section 4: Notifications -->
+            <div id="section-notifications" class="profile-section">
+                <h2 class="section-heading" data-i18n="profile.notifications">Уведомления</h2>
+
+                <div class="profile-card">
+                    <h3 data-i18n="profile.notifications.settings">Настройки уведомлений</h3>
+
+                    <div class="notification-toggle-container">
+                        <div>
+                            <div class="notification-toggle-label" data-i18n="profile.notifications.email">Email уведомления</div>
+                            <div class="notification-toggle-desc" data-i18n="profile.notifications.email.desc">Получать уведомления на почту</div>
+                        </div>
+                        <div class="theme-toggle notification-toggle" data-key="emailNotifications" role="switch" aria-checked="true" tabindex="0"></div>
+                    </div>
+
+                    <div class="notification-toggle-container">
+                        <div>
+                            <div class="notification-toggle-label" data-i18n="profile.notifications.sms">SMS уведомления</div>
+                            <div class="notification-toggle-desc" data-i18n="profile.notifications.sms.desc">Получать уведомления по SMS</div>
+                        </div>
+                        <div class="theme-toggle notification-toggle" data-key="smsNotifications" role="switch" aria-checked="false" tabindex="0"></div>
+                    </div>
+
+                    <div class="notification-toggle-container">
+                        <div>
+                            <div class="notification-toggle-label" data-i18n="profile.notifications.push">Push-уведомления</div>
+                            <div class="notification-toggle-desc" data-i18n="profile.notifications.push.desc">Получать push-уведомления в браузере</div>
+                        </div>
+                        <div class="theme-toggle notification-toggle" data-key="pushNotifications" role="switch" aria-checked="false" tabindex="0"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка выхода из аккаунта (внизу всех секций, и ПК и мобильная) -->
+            <div class="profile-footer-actions">
+                <button class="logout-btn logout-btn-red" id="btn-logout" data-i18n="profile.logout">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span data-i18n="profile.logout">Выйти из аккаунта</span>
+                </button>
+            </div>
+
+        </main>
+
+        <!-- ===== BOTTOM TAB BAR (mobile only) ===== -->
+        <div class="profile-bottom-bar" id="profile-bottom-bar">
+            <div class="profile-tab-item active" data-section="section-account">
+                <svg class="profile-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="profile-tab-label" data-i18n="profile.account">Аккаунт</span>
+            </div>
+            <div class="profile-tab-item" data-section="section-personalization">
+                <svg class="profile-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span class="profile-tab-label" data-i18n="profile.personalization">Персонализация</span>
+            </div>
+            <div class="profile-tab-item" data-section="section-security">
+                <svg class="profile-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span class="profile-tab-label" data-i18n="profile.security">Безопасность</span>
+            </div>
+            <div class="profile-tab-item" data-section="section-notifications">
+                <svg class="profile-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span class="profile-tab-label" data-i18n="profile.notifications">Уведомления</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Email Verify Overlay ===== -->
+    <div class="sms-overlay" id="email-verify-overlay" style="display:none;">
+        <div class="sms-box">
+            <h3 data-i18n="profile.email_verify_title">Подтверждение email</h3>
+            <p data-i18n="profile.email_verify_desc">Введите код из письма (тестовый код: 123456)</p>
+            <div class="code-inputs">
+                <input type="text" maxlength="1" class="verify-digit" data-index="0">
+                <input type="text" maxlength="1" class="verify-digit" data-index="1">
+                <input type="text" maxlength="1" class="verify-digit" data-index="2">
+                <input type="text" maxlength="1" class="verify-digit" data-index="3">
+                <input type="text" maxlength="1" class="verify-digit" data-index="4">
+                <input type="text" maxlength="1" class="verify-digit" data-index="5">
+            </div>
+            <button class="btn-primary" id="btn-verify-email" data-i18n="btn.verify">Подтвердить</button>
+            <button class="logout-btn" style="margin-top:10px;width:auto;padding:12px 24px;" id="btn-cancel-email-verify" data-i18n="btn.cancel">Отмена</button>
+        </div>
+    </div>
+
+    <!-- ===== FIREBASE + LOGIC ===== -->
+    <script type="module">
+        // ─── Firebase Imports ───
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut,
+            updatePassword,
+            EmailAuthProvider,
+            reauthenticateWithCredential
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import {
+            getFirestore,
+            doc,
+            getDoc,
+            setDoc
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // ─── Firebase Config ───
+        const firebaseConfig = {
+            apiKey: "AIzaSyBk8SHgxCOYjIrFkixIFAoy_BRpWsIUd7w",
+            authDomain: "violet-gloss.firebaseapp.com",
+            projectId: "violet-gloss",
+            storageBucket: "violet-gloss.firebasestorage.app",
+            messagingSenderId: "330589029963",
+            appId: "1:330589029963:web:a4947df92909e6d045afce"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // ─── Toast Notification ───
+        function showToast(message, type = 'info') {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.4s ease';
+                setTimeout(() => toast.remove(), 400);
+            }, 3500);
+        }
+
+        // ─── DOM References ───
+        const displayName = document.getElementById('display-name');
+        const displayEmail = document.getElementById('display-email');
+        const profileName = document.getElementById('profile-name');
+        const profileSurname = document.getElementById('profile-surname');
+        const profileEmail = document.getElementById('profile-email');
+        const profilePhone = document.getElementById('profile-phone');
+        const profileBirthdate = document.getElementById('profile-birthdate');
+        const avatarImage = document.getElementById('avatar-image');
+        const avatarDefaultIcon = document.getElementById('avatar-default-icon');
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarUploadTrigger = document.getElementById('avatar-upload-trigger');
+        const btnSave = document.getElementById('btn-save-profile');
+        const btnLogout = document.getElementById('btn-logout');
+        const themeSelect = document.getElementById('theme-select');
+        const languageSelect = document.getElementById('language-select');
+
+        // Populate day dropdown
+        const birthDay = document.getElementById('birth-day');
+        for (let i = 1; i <= 31; i++) {
+            const opt = document.createElement('option');
+            opt.value = String(i).padStart(2, '0');
+            opt.textContent = i;
+            birthDay.appendChild(opt);
+        }
+
+        // Populate year dropdown
+        const birthYear = document.getElementById('birth-year');
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear; i >= currentYear - 100; i--) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = i;
+            birthYear.appendChild(opt);
+        }
+
+        let currentUser = null;
+
+        // ─── Auth State ───
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            currentUser = user;
+
+            // Populate email
+            profileEmail.value = user.email || '';
+            displayEmail.textContent = user.email || '';
+
+            // Load user data from Firestore
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                const data = userDoc.exists() ? userDoc.data() : {};
+
+                // Google Auth fix: extract displayName if Firestore data is empty
+                if (!data.name && !data.surname && user.displayName) {
+                    const nameParts = user.displayName.trim().split(/\s+/);
+                    const extractedName = nameParts[0] || '';
+                    const extractedSurname = nameParts.slice(1).join(' ') || '';
+
+                    await setDoc(doc(db, 'users', user.uid), {
+                        name: extractedName,
+                        surname: extractedSurname,
+                        email: user.email || ''
+                    }, { merge: true });
+
+                    data.name = extractedName;
+                    data.surname = extractedSurname;
+                }
+
+                // Populate fields
+                profileName.value = data.name || '';
+                profileSurname.value = data.surname || '';
+                profilePhone.value = data.phone || '';
+                // Set birthdate dropdowns
+                if (data.birthdate) {
+                    const parts = data.birthdate.split('.');
+                    if (parts.length === 3) {
+                        birthDay.value = parts[0];
+                        document.getElementById('birth-month').value = parts[1];
+                        birthYear.value = parts[2];
+                    }
+                }
+
+                // Display name
+                const full = [data.name, data.surname].filter(Boolean).join(' ');
+                displayName.textContent = full || (window.t ? window.t('profile.default_user') : 'Пользователь');
+
+                // Avatar — always circle
+                if (data.avatarBase64) {
+                    avatarImage.src = data.avatarBase64;
+                    avatarImage.style.display = 'block';
+                    avatarImage.style.borderRadius = '50%';
+                    avatarDefaultIcon.style.display = 'none';
+                    // Update header avatar from saved data
+                    const headerAvatar = document.querySelector('.user-avatar');
+                    if (headerAvatar) {
+                        headerAvatar.innerHTML = `<img src="${data.avatarBase64}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="Avatar">`;
+                    }
+                    localStorage.setItem('vg-avatar', data.avatarBase64);
+                }
+
+                // Language — apply saved language
+const savedLang = localStorage.getItem('vg-language') || (data.language) || 'en';
+if (window.applyLanguage) {
+    window.applyLanguage(savedLang);
+}
+if (languageSelect) languageSelect.value = savedLang;
+
+                // Notification preferences
+                if (data.notifications) {
+                    document.querySelectorAll('.notification-toggle').forEach(toggle => {
+                        const key = toggle.dataset.key;
+                        if (data.notifications[key]) {
+                            toggle.classList.add('active');
+                            toggle.setAttribute('aria-checked', 'true');
+                            document.documentElement.dataset[key] = 'true';
+                        } else {
+                            toggle.classList.remove('active');
+                            toggle.setAttribute('aria-checked', 'false');
+                            delete document.documentElement.dataset[key];
+                        }
+                    });
+                }
+
+            } catch (err) {
+                console.error('Error loading user data:', err);
+                showToast(window.t ? window.t('profile.error.load') : 'Ошибка загрузки данных профиля', 'error');
+            }
+        });
+
+        // ─── Email Verification ───
+        function renderEmailVerification(user) {
+            emailVerifyArea.innerHTML = '';
+        }
+
+        function openEmailVerifyOverlay() {
+            const overlay = document.getElementById('email-verify-overlay');
+            overlay.style.display = 'flex';
+
+            // Clear previous inputs
+            overlay.querySelectorAll('.verify-digit').forEach(input => {
+                input.value = '';
+            });
+
+            // Focus first input
+            const firstInput = overlay.querySelector('.verify-digit[data-index="0"]');
+            if (firstInput) firstInput.focus();
+
+            // Setup digit input behavior
+            setupVerifyDigitInputs(overlay);
+        }
+
+        function setupVerifyDigitInputs(overlay) {
+            const digits = overlay.querySelectorAll('.verify-digit');
+
+            digits.forEach((input, idx) => {
+                // Remove old listeners by cloning
+                const newInput = input.cloneNode(true);
+                input.parentNode.replaceChild(newInput, input);
+
+                newInput.addEventListener('input', (e) => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    e.target.value = val;
+                    if (val && idx < digits.length - 1) {
+                        const next = overlay.querySelector(`.verify-digit[data-index="${idx + 1}"]`);
+                        if (next) next.focus();
+                    }
+                });
+
+                newInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+                        const prev = overlay.querySelector(`.verify-digit[data-index="${idx - 1}"]`);
+                        if (prev) prev.focus();
+                    }
+                });
+            });
+        }
+
+        // Email verify confirm button
+        document.getElementById('btn-verify-email').addEventListener('click', async () => {
+            const overlay = document.getElementById('email-verify-overlay');
+            const digits = overlay.querySelectorAll('.verify-digit');
+            const code = Array.from(digits).map(d => d.value).join('');
+
+            if (code.length !== 6) {
+                showToast(window.t ? window.t('profile.error.code6') : 'Введите 6-значный код', 'error');
+                return;
+            }
+
+            // Test code: 123456
+            if (code === '123456') {
+                if (currentUser) {
+                    try {
+                        await setDoc(doc(db, 'users', currentUser.uid), { emailVerified: true }, { merge: true });
+                    } catch (err) {
+                        console.error('Error saving email verified status:', err);
+                    }
+                }
+                showToast(window.t ? window.t('profile.email_verified') : 'Email успешно подтверждён!', 'success');
+                overlay.style.display = 'none';
+                renderEmailVerification({ ...currentUser, emailVerified: true });
+            } else {
+                showToast(window.t ? window.t('profile.error.wrong_code') : 'Неверный код подтверждения', 'error');
+            }
+        });
+
+        // Email verify cancel button
+        document.getElementById('btn-cancel-email-verify').addEventListener('click', () => {
+            document.getElementById('email-verify-overlay').style.display = 'none';
+        });
+
+        // ─── Navigation: Sidebar (PC) — все секции видны, кнопки = якоря ───
+        const sections = document.querySelectorAll('.profile-section');
+        const sidebarLinks = document.querySelectorAll('.profile-sidebar-nav a[data-section]');
+
+        function switchSection(targetId) {
+            // Update sidebar active state
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            sidebarLinks.forEach(l => {
+                if (l.dataset.section === targetId) l.classList.add('active');
+            });
+
+            // All sections are always visible — just scroll to target
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Sidebar link clicks (PC) — якорные ссылки
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchSection(link.dataset.section);
+            });
+        });
+
+        // Intersection Observer: подсветка сайдбара при скролле
+        const profileMain = document.querySelector('.profile-main');
+        if (profileMain && window.innerWidth > 900) {
+            const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        sidebarLinks.forEach(l => l.classList.remove('active'));
+                        const activeLink = document.querySelector(`.profile-sidebar-nav a[data-section="${entry.target.id}"]`);
+                        if (activeLink) activeLink.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(s => sectionObserver.observe(s));
+        }
+
+        // ─── Theme Select ───
+        function applyThemeValue(value) {
+            if (value === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else if (value === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                // system
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+            }
+            localStorage.setItem('vg-theme', value);
+        }
+
+        // Initialize theme from localStorage (default: light)
+        const savedTheme = localStorage.getItem('vg-theme') || 'light';
+        themeSelect.value = savedTheme;
+        applyThemeValue(savedTheme);
+
+        themeSelect.addEventListener('change', () => {
+            applyThemeValue(themeSelect.value);
+        });
+
+        // Language Selection (select dropdown)
+if (languageSelect) {
+    // Установить текущее значение из localStorage или из данных пользователя
+    const savedLang = localStorage.getItem('vg-language') || 'en';
+    languageSelect.value = savedLang;
+
+    languageSelect.addEventListener('change', async () => {
+        const lang = languageSelect.value;
+        localStorage.setItem('vg-language', lang);
+        if (currentUser) {
+            try {
+                await setDoc(doc(db, 'users', currentUser.uid), { language: lang }, { merge: true });
+            } catch (err) {
+                console.error('Error saving language:', err);
+            }
+        }
+        if (window.applyLanguage) {
+            window.applyLanguage(lang);
+        }
+        if (window.refreshCustomSelects) {
+            window.refreshCustomSelects();
+        }
+    });
+}
+
+        // ─── Avatar Upload with Crop (CIRCLE ONLY) ───
+        let pendingAvatarBase64 = null;
+
+        avatarUploadTrigger.addEventListener('click', () => {
+            avatarInput.click();
+        });
+
+        document.getElementById('avatar-container').addEventListener('click', (e) => {
+            if (e.target === avatarUploadTrigger || avatarUploadTrigger.contains(e.target)) return;
+            avatarInput.click();
+        });
+
+        avatarInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showToast(window.t ? window.t('profile.error.select_image') : 'Выберите изображение', 'error');
+                return;
+            }
+
+            if (file.size > 2 * 1024 * 1024) {
+                showToast(window.t ? window.t('profile.error.file_size') : 'Размер файла не должен превышать 2 МБ', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                pendingAvatarBase64 = ev.target.result;
+                showAvatarCropOverlay();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function showAvatarCropOverlay() {
+            // Remove existing overlay if any
+            const existing = document.getElementById('avatar-crop-overlay');
+            if (existing) existing.remove();
+
+            const overlay = document.createElement('div');
+            overlay.id = 'avatar-crop-overlay';
+            overlay.className = 'avatar-crop-overlay';
+            overlay.innerHTML = `
+                <div class="avatar-crop-box">
+                    <h3>${window.t ? window.t('profile.avatar.select_area') : 'Выберите область аватара'}</h3>
+                    <div class="avatar-crop-preview" id="crop-preview">
+                        <img src="${pendingAvatarBase64}" alt="Preview" style="transform:scale(1);transition:transform 0.15s ease;">
+                    </div>
+                    <div class="avatar-crop-zoom">
+                        <label>${window.t ? window.t('profile.avatar.zoom') : 'Масштаб'}</label>
+                        <input type="range" id="avatar-zoom" min="100" max="300" value="100">
+                    </div>
+                    <div class="avatar-crop-actions">
+                        <button class="btn-primary" id="btn-apply-avatar" data-i18n="btn.apply">Применить</button>
+                        <button class="logout-btn" style="margin-top:0;width:auto;padding:12px 24px;" id="btn-cancel-avatar" data-i18n="btn.cancel">Отмена</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            // Zoom slider
+            const zoomSlider = document.getElementById('avatar-zoom');
+            const previewImg = overlay.querySelector('#crop-preview img');
+            zoomSlider.addEventListener('input', () => {
+                const zoomValue = parseInt(zoomSlider.value, 10);
+                previewImg.style.transform = 'scale(' + (zoomValue / 100) + ')';
+            });
+
+            // Drag to pan
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let translateX = 0;
+            let translateY = 0;
+
+            previewImg.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                const zoomValue = parseInt(zoomSlider.value, 10) / 100;
+                previewImg.style.transform = `scale(${zoomValue}) translate(${translateX / zoomValue}px, ${translateY / zoomValue}px)`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Touch support for pan
+            previewImg.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                e.preventDefault();
+            }, { passive: false });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                const zoomValue = parseInt(zoomSlider.value, 10) / 100;
+                previewImg.style.transform = `scale(${zoomValue}) translate(${translateX / zoomValue}px, ${translateY / zoomValue}px)`;
+            }, { passive: false });
+
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            // Apply
+            document.getElementById('btn-apply-avatar').addEventListener('click', async () => {
+                avatarImage.src = pendingAvatarBase64;
+                avatarImage.style.display = 'block';
+                avatarImage.style.borderRadius = '50%';
+                avatarDefaultIcon.style.display = 'none';
+
+                // Update header avatar
+                const headerAvatar = document.querySelector('.user-avatar');
+                if (headerAvatar) {
+                    headerAvatar.innerHTML = `<img src="${pendingAvatarBase64}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="Avatar">`;
+                }
+
+                if (currentUser) {
+                    try {
+                        await setDoc(doc(db, 'users', currentUser.uid), {
+                            avatarBase64: pendingAvatarBase64,
+                            avatarShape: 'circle'
+                        }, { merge: true });
+                        localStorage.setItem('vg-avatar', pendingAvatarBase64);
+                        showToast(window.t ? window.t('profile.avatar.updated') : 'Аватар обновлён', 'success');
+                    } catch (err) {
+                        showToast(window.t ? window.t('profile.avatar.error') : 'Ошибка загрузки аватара', 'error');
+                    }
+                }
+
+                overlay.remove();
+                pendingAvatarBase64 = null;
+            });
+
+            // Cancel
+            document.getElementById('btn-cancel-avatar').addEventListener('click', () => {
+                overlay.remove();
+                pendingAvatarBase64 = null;
+            });
+        }
+
+        // ─── Save Profile ───
+        btnSave.addEventListener('click', async () => {
+            if (!currentUser) return;
+
+            btnSave.textContent = window.t ? window.t('profile.saving') : 'Сохранение...';
+            btnSave.disabled = true;
+
+            try {
+                const data = {
+                    name: profileName.value.trim(),
+                    surname: profileSurname.value.trim(),
+                    phone: profilePhone.value.trim(),
+                    birthdate: [birthDay.value, document.getElementById('birth-month').value, birthYear.value].filter(Boolean).join('.'),
+                    email: currentUser.email
+                };
+
+                await setDoc(doc(db, 'users', currentUser.uid), data, { merge: true });
+
+                // Update display
+                const full = [data.name, data.surname].filter(Boolean).join(' ');
+                displayName.textContent = full || (window.t ? window.t('profile.default_user') : 'Пользователь');
+
+                showToast(window.t ? window.t('profile.saved') : 'Профиль сохранён', 'success');
+            } catch (err) {
+                showToast(window.t ? window.t('profile.error.save') : 'Ошибка сохранения профиля', 'error');
+            } finally {
+                btnSave.textContent = window.t ? window.t('profile.save') : 'Сохранить изменения';
+                btnSave.disabled = false;
+            }
+        });
+
+        // ─── Logout ───
+        function doLogout() {
+            return async () => {
+                try {
+                    await signOut(auth);
+                    localStorage.setItem('vg-theme', 'light');
+                    localStorage.setItem('vg-language', 'en');
+                    document.documentElement.removeAttribute('data-theme');
+                    if (window.applyLanguage) window.applyLanguage('en');
+                    window.location.href = 'index.html';
+                } catch (err) {
+                    showToast(window.t ? window.t('profile.error.logout') : 'Ошибка при выходе', 'error');
+                }
+            };
+        }
+        btnLogout.addEventListener('click', doLogout());
+
+        // ─── Change Password ───
+        document.getElementById('btn-change-password').addEventListener('click', async () => {
+            const currentPass = document.getElementById('current-password').value;
+            const newPass = document.getElementById('new-password').value;
+            const confirmPass = document.getElementById('confirm-password').value;
+
+            if (!currentPass || !newPass || !confirmPass) {
+                showToast(window.t ? window.t('profile.error.fill_all') : 'Заполните все поля', 'error');
+                return;
+            }
+
+            if (newPass.length < 6) {
+                showToast(window.t ? window.t('profile.error.password_min') : 'Новый пароль должен содержать минимум 6 символов', 'error');
+                return;
+            }
+
+            if (newPass !== confirmPass) {
+                showToast(window.t ? window.t('profile.error.password_mismatch') : 'Пароли не совпадают', 'error');
+                return;
+            }
+
+            if (!currentUser || !currentUser.email) return;
+
+            try {
+                const credential = EmailAuthProvider.credential(currentUser.email, currentPass);
+                await reauthenticateWithCredential(currentUser, credential);
+                await updatePassword(currentUser, newPass);
+                showToast(window.t ? window.t('profile.password_changed') : 'Пароль успешно изменён', 'success');
+
+                document.getElementById('current-password').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-password').value = '';
+                document.getElementById('password-strength-bar').style.width = '0';
+            } catch (err) {
+                const errorMessages = {
+                    'auth/wrong-password': window.t ? window.t('profile.error.wrong_password') : 'Неверный текущий пароль',
+                    'auth/weak-password': window.t ? window.t('profile.error.weak_password') : 'Новый пароль слишком простой',
+                    'auth/too-many-requests': window.t ? window.t('error.tooManyRequests') : 'Слишком много попыток. Попробуйте позже',
+                    'auth/requires-recent-login': window.t ? window.t('profile.error.recent_login') : 'Требуется повторный вход. Выйдите и войдите снова'
+                };
+                showToast(errorMessages[err.code] || (window.t ? window.t('profile.error.general') : 'Ошибка: ') + err.message, 'error');
+            }
+        });
+
+        // ─── Password Strength ───
+        document.getElementById('new-password').addEventListener('input', (e) => {
+            const val = e.target.value;
+            const bar = document.getElementById('password-strength-bar');
+            let strength = 0;
+
+            if (val.length >= 6) strength += 25;
+            if (val.length >= 10) strength += 25;
+            if (/[A-Z]/.test(val) && /[a-z]/.test(val)) strength += 25;
+            if (/[0-9]/.test(val) && /[^A-Za-z0-9]/.test(val)) strength += 25;
+
+            bar.style.width = strength + '%';
+            bar.style.background = strength <= 25 ? '#d32f2f' : strength <= 50 ? '#FF5A00' : strength <= 75 ? '#FF9800' : '#2E7D32';
+        });
+
+        // ─── Notification Toggles ───
+        document.querySelectorAll('.notification-toggle').forEach(toggle => {
+            const key = toggle.dataset.key;
+
+            // Initialize visual state
+            const isChecked = toggle.getAttribute('aria-checked') === 'true';
+            if (isChecked) {
+                document.documentElement.dataset[key] = 'true';
+                toggle.classList.add('active');
+            }
+
+            toggle.addEventListener('click', async () => {
+                const isActive = toggle.getAttribute('aria-checked') === 'true';
+                const newState = !isActive;
+
+                toggle.setAttribute('aria-checked', String(newState));
+
+                // Toggle active class for visual state
+                if (newState) {
+                    toggle.classList.add('active');
+                    document.documentElement.dataset[key] = 'true';
+                } else {
+                    toggle.classList.remove('active');
+                    delete document.documentElement.dataset[key];
+                }
+
+                // Save to Firestore
+                if (currentUser) {
+                    try {
+                        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+                        const currentNotifications = userDoc.exists() ? (userDoc.data().notifications || {}) : {};
+                        currentNotifications[key] = newState;
+
+                        await setDoc(doc(db, 'users', currentUser.uid), {
+                            notifications: currentNotifications
+                        }, { merge: true });
+
+                        showToast(newState ? (window.t ? window.t('profile.notifications.on') : 'Уведомления включены') : (window.t ? window.t('profile.notifications.off') : 'Уведомления отключены'), 'success');
+                    } catch (err) {
+                        showToast(window.t ? window.t('profile.error.settings_save') : 'Ошибка сохранения настроек', 'error');
+                    }
+                }
+            });
+
+            toggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle.click();
+                }
+            });
+        });
+
+        // ─── Initialize Custom Selects ───
+        window.initCustomSelects && window.initCustomSelects();
+
+    </script>
+
+    <!-- Main JS for language, custom selects, etc. -->
+    <script type="module" src="javascript/main.js"></script>
+
+    <script>
+        // Initialize custom selects after main.js loads and populates options
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (window.initCustomSelects) window.initCustomSelects();
+            }, 300);
+        });
+
+    </script>
+</body>
+</html>

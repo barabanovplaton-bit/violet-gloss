@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — Violet Gloss</title>
+    <meta name="description" content="Войдите в аккаунт Violet Gloss для доступа к личному кабинету.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--milk);
+            padding: 20px;
+        }
+        .auth-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .auth-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            margin-bottom: 16px;
+            transition: color 0.2s;
+        }
+        .auth-back:hover {
+            color: var(--accent);
+        }
+        .auth-logo {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: block;
+        }
+        .auth-logo span {
+            color: #FF5A00;
+        }
+        .auth-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+        .auth-form label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .auth-form input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            background: var(--milk);
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .auth-form input:focus {
+            outline: none;
+            border-color: #FF5A00;
+            background: var(--white);
+        }
+        .input-password-wrapper {
+            position: relative;
+        }
+        .input-password-wrapper input {
+            padding-right: 48px;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-gray);
+        }
+        .btn-auth {
+            width: 100%;
+            padding: 14px;
+            background: #FF5A00;
+            color: #FFF;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .btn-auth:hover {
+            background: #E65000;
+        }
+        .btn-auth:disabled {
+            background: #CCC;
+            cursor: not-allowed;
+        }
+        .btn-google {
+            width: 100%;
+            padding: 14px;
+            background: var(--white);
+            color: var(--text-dark);
+            border: 1.5px solid #E0E0E0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .btn-google:hover {
+            background: #F5F5F5;
+        }
+        .btn-google svg {
+            width: 20px;
+            height: 20px;
+        }
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E0E0E0;
+        }
+        .auth-divider span {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+        .auth-links {
+            text-align: center;
+            margin-top: 24px;
+        }
+        .auth-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #FF5A00;
+            text-decoration: none;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        .auth-links p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+        }
+        .auth-error {
+            background: #FFF0F0;
+            color: #D32F2F;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        [data-theme="dark"] .auth-form input {
+            background: #252525;
+            border-color: #444;
+            color: var(--text-dark);
+        }
+        [data-theme="dark"] .auth-form input:focus {
+            background: #2a2a2a;
+        }
+        [data-theme="dark"] .btn-google {
+            background: #252525;
+            border-color: #444;
+        }
+        [data-theme="dark"] .btn-google:hover {
+            background: #2a2a2a;
+        }
+        [data-theme="dark"] .auth-card {
+            background: #1E1E1E;
+        }
+        [data-theme="dark"] .auth-divider::before,
+        [data-theme="dark"] .auth-divider::after {
+            background: #444;
+        }
+        .form-group.error input {
+            border-color: #d32f2f !important;
+            background: rgba(211, 47, 47, 0.04);
+        }
+        .form-group .error-message {
+            color: #d32f2f;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+        [data-theme="dark"] .form-group.error input {
+            background: rgba(211, 47, 47, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-card">
+            <a href="index.html" class="auth-back">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                <span data-i18n="login.home">На главную</span>
+            </a>
+            <a href="index.html" class="auth-logo">Violet <span>Gloss</span></a>
+            <p class="auth-subtitle" data-i18n="login.title">Войдите в свой аккаунт</p>
+
+            <div class="auth-error" id="login-error"></div>
+
+            <form class="auth-form" id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="login-email" data-i18n="login.email">Email</label>
+                    <input type="email" id="login-email" placeholder="email@example.com" data-i18n-ph="login.email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password" data-i18n="login.password">Пароль</label>
+                    <div class="input-password-wrapper">
+                        <input type="password" id="login-password" placeholder="Введите пароль" data-i18n-ph="login.password.ph" required>
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('login-password', this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-auth" id="btn-login" data-i18n="login.submit">Войти</button>
+            </form>
+
+            <div class="auth-divider">
+                <span data-i18n="login.or">или</span>
+            </div>
+
+            <button class="btn-google" id="btn-google">
+                <svg viewBox="0 0 24 24">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                <span data-i18n="login.google">Войти через Google</span>
+            </button>
+
+            <div class="auth-links">
+                <p><a href="reset-password.html" data-i18n="login.forgot">Забыли пароль?</a></p>
+                <p><span data-i18n="login.no.account">Нет аккаунта?</span> <a href="register.html" data-i18n="login.register">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+            } else {
+                input.type = 'password';
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+            }
+        }
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBk8SHgxCOYjIrFkixIFAoy_BRpWsIUd7w",
+            authDomain: "violet-gloss.firebaseapp.com",
+            projectId: "violet-gloss",
+            storageBucket: "violet-gloss.firebasestorage.app",
+            messagingSenderId: "330589029963",
+            appId: "1:330589029963:web:a4947df92909e6d045afce"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const btnLogin = document.getElementById('btn-login');
+        const btnGoogle = document.getElementById('btn-google');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loginError.style.display = 'none';
+            
+            const emailInput = document.getElementById('login-email');
+            const passwordInput = document.getElementById('login-password');
+            
+            // Clear previous errors
+            document.querySelectorAll('.form-group').forEach(g => {
+                g.classList.remove('error');
+                const msg = g.querySelector('.error-message');
+                if (msg) msg.remove();
+            });
+            
+            let valid = true;
+            
+            // Validate email
+            if (!emailInput.value.trim()) {
+                const group = emailInput.closest('.form-group');
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.emailRequired') : 'Введите email';
+                group.appendChild(msg);
+                valid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+                const group = emailInput.closest('.form-group');
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.emailInvalid') : 'Введите корректный email';
+                group.appendChild(msg);
+                valid = false;
+            }
+            
+            // Validate password
+            if (!passwordInput.value) {
+                const group = passwordInput.closest('.form-group');
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.passwordRequired') : 'Введите пароль';
+                group.appendChild(msg);
+                valid = false;
+            }
+            
+            if (!valid) return;
+            
+            btnLogin.disabled = true;
+            btnLogin.textContent = window.t ? window.t('auth.signingIn') : 'Вход...';
+
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                window.location.href = 'index.html';
+            } catch (error) {
+                loginError.textContent = getErrorMessage(error.code);
+                loginError.style.display = 'block';
+                btnLogin.disabled = false;
+                btnLogin.textContent = window.t ? window.t('auth.signIn') : 'Войти';
+            }
+        });
+
+        // Clear validation on input
+        document.querySelectorAll('.auth-form input').forEach(input => {
+            input.addEventListener('input', () => {
+                const group = input.closest('.form-group');
+                if (group) {
+                    group.classList.remove('error');
+                    const msg = group.querySelector('.error-message');
+                    if (msg) msg.remove();
+                }
+            });
+        });
+
+        btnGoogle.addEventListener('click', async () => {
+            loginError.style.display = 'none';
+            const provider = new firebase.auth.GoogleAuthProvider();
+
+            try {
+                const result = await auth.signInWithPopup(provider);
+                window.location.href = 'index.html';
+            } catch (error) {
+                loginError.textContent = getErrorMessage(error.code);
+                loginError.style.display = 'block';
+            }
+        });
+
+        function getErrorMessage(code) {
+            const messages = {
+                'auth/user-not-found': window.t ? window.t('error.userNotFound') : 'Пользователь не найден',
+                'auth/wrong-password': window.t ? window.t('error.wrongPassword') : 'Неверный пароль',
+                'auth/invalid-email': window.t ? window.t('error.invalidEmail') : 'Некорректный email',
+                'auth/too-many-requests': window.t ? window.t('error.tooManyRequests') : 'Слишком много попыток',
+                'auth/invalid-credential': window.t ? window.t('error.invalidCredential') : 'Неверные данные',
+                'auth/popup-closed-by-user': window.t ? window.t('error.popupClosed') : 'Окно авторизации было закрыто',
+                'auth/account-exists-with-different-credential': window.t ? window.t('error.accountExists') : 'Аккаунт уже существует'
+            };
+            return messages[code] || (window.t ? window.t('error.networkError') : 'Произошла ошибка. Попробуйте ещё раз.');
+        }
+    </script>
+
+    <script type="module" src="javascript/main.js"></script>
+</body>
+</html>

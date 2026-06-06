@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Техническое обслуживание и ремонт — Violet Gloss</title>
+    <meta name="description" content="Техническое обслуживание и ремонт автомобилей в Дубае. Castrol, Mobil 1, Liqui Moly, Bosch. Профессиональное оборудование.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Service Hero -->
+    <section class="service-hero anim anim-up">
+        <div class="container">
+            <h1 data-i18n="services.autoservice.page.title">Техническое обслуживание и ремонт</h1>
+            <p data-i18n="services.autoservice.page.subtitle">Комплексное техническое обслуживание вашего автомобиля: диагностика, замена расходников, проверка всех систем на профессиональном оборудовании Bosch.</p>
+            <a href="contacts.html" class="btn-primary" data-i18n="btn.calculate_price">Рассчитать стоимость</a>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section anim anim-up" id="tariffs">
+        <div class="container">
+            <h2 class="section-title" data-i18n="pricing.title">Тарифы</h2>
+            <p class="section-subtitle" data-i18n="pricing.autoservice.subtitle">Выберите оптимальный вариант обслуживания для вашего автомобиля</p>
+            <div class="pricing-grid" data-anim-children="scale">
+                <div class="pricing-card">
+                    <h3 data-i18n="pricing.autoservice.basic">ТО-Базовое</h3>
+                    <div class="price">500 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.autoservice.basic.f1">Замена масла и масляного фильтра</li>
+                        <li data-i18n="pricing.autoservice.basic.f2">Проверка уровня жидкостей</li>
+                        <li data-i18n="pricing.autoservice.basic.f3">Визуальный осмотр подвески</li>
+                        <li data-i18n="pricing.autoservice.basic.f4">Проверка тормозных колодок</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+                <div class="pricing-card recommended">
+                    <span class="badge" data-i18n="badge.recommended">Рекомендуем</span>
+                    <h3 data-i18n="pricing.autoservice.extended">ТО-Расширенное</h3>
+                    <div class="price">1 200 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.autoservice.extended.f1">Всё из базового ТО</li>
+                        <li data-i18n="pricing.oil.all_filters">Замена всех фильтров</li>
+                        <li data-i18n="pricing.autoservice.computer_diag">Компьютерная диагностика</li>
+                        <li data-i18n="pricing.autoservice.extended.f4">Проверка ходовой части</li>
+                        <li data-i18n="pricing.autoservice.extended.f5">Проверка электрооборудования</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 data-i18n="pricing.autoservice.complex_diag">Комплексная диагностика</h3>
+                    <div class="price">350 AED</div>
+                    <ul class="features">
+                        <li data-i18n="pricing.autoservice.complex_diag.f1">Компьютерная диагностика двигателя</li>
+                        <li data-i18n="pricing.autoservice.complex_diag.f2">Диагностика АКПП</li>
+                        <li data-i18n="pricing.autoservice.complex_diag.f3">Проверка электрических систем</li>
+                        <li data-i18n="pricing.autoservice.complex_diag.f4">Полный отчёт о состоянии</li>
+                        <li data-i18n="pricing.autoservice.complex_diag.f5">Рекомендации по ремонту</li>
+                    </ul>
+                    <a href="contacts.html" class="btn-primary" data-i18n="btn.choose">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="trust.advantage">Наше преимущество</h2>
+            <div class="trust-grid" data-anim-children="up">
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="16" width="32" height="24" rx="3" stroke="#FF5A00" stroke-width="2"/>
+                            <path d="M16 16V12C16 9.79086 17.7909 8 20 8H28C30.2091 8 32 9.79086 32 12V16" stroke="#FF5A00" stroke-width="2"/>
+                            <rect x="20" y="24" width="8" height="6" rx="1" fill="#FF5A00"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.closed_boxes">Закрытые стерильные боксы</h4>
+                    <p data-i18n="trust.closed_boxes.desc">Полная конфиденциальность и безопасность вашего автомобиля в индивидуальном закрытом стерильном боксе на время всех работ.</p>
+                    <div class="trust-line"></div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 6L28.5 17H40L30.5 24.5L34 36L24 29L14 36L17.5 24.5L8 17H19.5L24 6Z" stroke="#FF5A00" stroke-width="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.masters_7">Мастера 7+ лет</h4>
+                    <p data-i18n="trust.masters_7.desc">Наши специалисты имеют стаж работы более 7 лет и сертификацию от ведущих мировых брендов детейлинг-индустрии.</p>
+                    <div class="trust-line"></div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="16" stroke="#FF5A00" stroke-width="2"/>
+                            <path d="M24 14V24L30 30" stroke="#FF5A00" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M8 24H4M44 24H40M24 4V8M24 40V44" stroke="#FF5A00" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h4 data-i18n="trust.concierge">Консьерж-сервис</h4>
+                    <p data-i18n="trust.concierge.desc">Забираем и доставляем ваш автомобиль в удобное для вас время и место. Вам не нужно никуда ехать — мы всё сделаем за вас.</p>
+                    <div class="trust-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners-section anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="partners.title2">Наши партнёры</h2>
+            <p class="section-subtitle" data-i18n="partners.subtitle2">Работаем только с лучшими мировыми брендами</p>
+            <div class="partners-grid" data-anim-children="scale">
+                <div class="partner-card">
+                    <div class="partner-logo">Castrol</div>
+                    <p data-i18n="partner.castrol.full_desc">Мировой лидер в производстве моторных масел и смазочных материалов</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">Mobil 1</div>
+                    <p data-i18n="partner.mobil1.full_desc">Синтетические моторные масла высшего качества для максимальной защиты двигателя</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">Liqui Moly</div>
+                    <p data-i18n="partner.liquimoly.full_desc">Немецкие моторные масла, присадки и автохимия премиум-класса</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">Bosch</div>
+                    <p data-i18n="partner.bosch.full_desc">Профессиональное диагностическое оборудование и запчасти для автосервиса</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="process.how_we_work">Как мы работаем</h2>
+            <div class="process-steps" data-anim-children="up">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h4 data-i18n="process.step.inspection">Осмотр</h4>
+                    <p data-i18n="process.autoservice.inspection.desc">Визуальный осмотр автомобиля, опрос владельца о проблемах и подготовка плана работ.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h4 data-i18n="process.autoservice.diagnostics">Диагностика</h4>
+                    <p data-i18n="process.autoservice.diagnostics.desc">Компьютерная диагностика всех систем автомобиля на профессиональном оборудовании Bosch.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h4 data-i18n="process.autoservice.repair">Ремонт / ТО</h4>
+                    <p data-i18n="process.autoservice.repair.desc">Выполнение необходимых работ: замена расходников, ремонт узлов и агрегатов по согласованному плану.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h4 data-i18n="process.step.control">Контроль</h4>
+                    <p data-i18n="process.autoservice.control.desc">Повторная диагностика, тестовая поездка и проверка качества выполненных работ перед передачей клиенту.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews anim anim-up">
+        <div class="container">
+            <h2 class="section-title" data-i18n="reviews.clients">Отзывы клиентов</h2>
+            <div class="review-cards" data-anim-children="up">
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text" data-i18n="review.autoservice.1">Расширенное ТО на Mercedes — нашли проблему с подвеской, которую дилер не заметил. Профессионализм на высшем уровне!</p>
+                    <div class="review-meta">
+                        <span class="review-author">Omar S.</span>
+                        <span class="review-car">Mercedes-AMG GT</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text" data-i18n="review.autoservice.2">Комплексная диагностика перед покупкой подержанного Range Rover. Выявили скрытые дефекты и помогли сэкономить на ремонте.</p>
+                    <div class="review-meta">
+                        <span class="review-author">Deepak M.</span>
+                        <span class="review-car">Range Rover Sport</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                    <p class="review-text" data-i18n="review.autoservice.3">Базовое ТО сделали быстро и качественно. Хотелось бы больше прозрачности в расчёте стоимости запчастей, но в целом доволен.</p>
+                    <div class="review-meta">
+                        <span class="review-author">Anna L.</span>
+                        <span class="review-car">Bentley Continental GT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="javascript/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.initCustomSelects && window.initCustomSelects();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании — Violet Gloss</title>
+    <meta name="description" content="Узнайте больше о Violet Gloss — премиальном детейлинг-центре в Дубае с 7-летним опытом и доверием правительства ОАЭ.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- About Hero Section -->
+    <section class="about-page">
+        <div class="container">
+            <div class="about-page-story anim anim-up">
+                <div class="about-page-image">
+                    <img src="https://placehold.co/800x500/1E1E1E/FF5A00?text=Violet+Gloss+Studio" alt="Violet Gloss Studio">
+                </div>
+                <div class="about-page-text">
+                    <h1 data-i18n="about.title">Наша история</h1>
+                    <p data-i18n="about.subtitle">Violet Gloss — это не просто детейлинг-центр, это философия безупречного подхода к уходу за автомобилем. Мы начали свой путь в 2017 году с одной простой цели: предоставить автовладельцам Дубая сервис мирового уровня.</p>
+                    <p data-i18n="about.paragraph2">За 7 лет работы мы стали единственным детейлинг-центром, которому доверяет правительство ОАЭ. Наши мастера сертифицированы ведущими мировыми брендами, а каждый проект — это произведение искусства.</p>
+                    <p data-i18n="about.paragraph3">Сегодня Violet Gloss — это 12 оборудованных боксов, команда из 30+ профессионалов и более 2000 довольных клиентов. Мы продолжаем расти и совершенствоваться, оставаясь верными нашим принципам: качество, конфиденциальность и индивидуальный подход.</p>
+                </div>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="about-mission anim anim-up">
+                <h2 data-i18n="about.mission">Наша миссия</h2>
+                <div class="mission-cards" data-anim-children="up">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4L24.5 14H36L27 21.5L30.5 33L20 26.5L9.5 33L13 21.5L4 14H15.5L20 4Z" stroke="#FF5A00" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="about.quality">Качество</h3>
+                        <p data-i18n="about.quality.desc">Мы используем только сертифицированные материалы и передовые технологии, чтобы обеспечить безупречный результат.</p>
+                    </div>
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="6" y="12" width="28" height="20" rx="3" stroke="#FF5A00" stroke-width="2"/>
+                                <path d="M14 12V8C14 5.79086 15.7909 4 18 4H22C24.2091 4 26 5.79086 26 8V12" stroke="#FF5A00" stroke-width="2"/>
+                                <circle cx="20" cy="22" r="3" fill="#FF5A00"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="about.confidentiality">Конфиденциальность</h3>
+                        <p data-i18n="about.confidentiality.desc">Закрытые боксы и строгая политика конфиденциальности гарантируют полную безопасность вашего автомобиля и личных данных.</p>
+                    </div>
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="20" cy="20" r="14" stroke="#FF5A00" stroke-width="2"/>
+                                <path d="M20 10V20L26 26" stroke="#FF5A00" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="about.punctuality">Пунктуальность</h3>
+                        <p data-i18n="about.punctuality.desc">Мы ценим ваше время и всегда выполняем работы в оговорённые сроки. Консьерж-сервис для вашего удобства.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Section -->
+            <div class="about-team anim anim-up">
+                <h2 data-i18n="about.team">Наша команда</h2>
+                <div class="team-grid" data-anim-children="scale">
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="https://placehold.co/200x200/1E1E1E/FF5A00?text=АК" alt="Алексей Козлов">
+                        </div>
+                        <h4 data-i18n="about.team.alexey">Алексей Козлов</h4>
+                        <span data-i18n="about.role.ceo">Основатель и CEO</span>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="https://placehold.co/200x200/1E1E1E/FF5A00?text=ДМ" alt="Дмитрий Морозов">
+                        </div>
+                        <h4 data-i18n="about.team.dmitry">Дмитрий Морозов</h4>
+                        <span data-i18n="about.role.wrapping">Главный мастер оклейки</span>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="https://placehold.co/200x200/1E1E1E/FF5A00?text=ИС" alt="Игорь Смирнов">
+                        </div>
+                        <h4 data-i18n="about.team.igor">Игорь Смирнов</h4>
+                        <span data-i18n="about.role.interior">Специалист по интерьеру</span>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="https://placehold.co/200x200/1E1E1E/FF5A00?text=МП" alt="Мария Петрова">
+                        </div>
+                        <h4 data-i18n="about.team.maria">Мария Петрова</h4>
+                        <span data-i18n="about.role.client_manager">Менеджер по работе с клиентами</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificates Section -->
+            <div class="about-certificates anim anim-up">
+                <h2 data-i18n="about.certificates">Сертификаты и награды</h2>
+                <div class="certificates-grid" data-anim-children="scale">
+                    <div class="certificate-card">
+                        <img src="https://placehold.co/280x200/1E1E1E/FFFFFF?text=XPEL+Certified" alt="XPEL Certified">
+                        <h4 data-i18n="about.cert.xpel">XPEL Certified Installer</h4>
+                    </div>
+                    <div class="certificate-card">
+                        <img src="https://placehold.co/280x200/1E1E1E/FFFFFF?text=STEK+Partner" alt="STEK Partner">
+                        <h4 data-i18n="about.cert.stek">STEK Official Partner</h4>
+                    </div>
+                    <div class="certificate-card">
+                        <img src="https://placehold.co/280x200/1E1E1E/FFFFFF?text=3M+Approved" alt="3M Approved">
+                        <h4 data-i18n="about.cert.3m">3M Approved Detailer</h4>
+                    </div>
+                    <div class="certificate-card">
+                        <img src="https://placehold.co/280x200/1E1E1E/FFFFFF?text=SunTek+Pro" alt="SunTek Pro">
+                        <h4 data-i18n="about.cert.suntek">SunTek Professional</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="javascript/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.initCustomSelects && window.initCustomSelects();
+});
+</script>
+</body>
+</html>

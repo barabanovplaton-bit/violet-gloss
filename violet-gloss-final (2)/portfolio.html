@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио работ — Violet Gloss</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .portfolio-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .portfolio-section h2 {
+            text-align: center;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 300;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+        .portfolio-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .portfolio-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        /* Dark theme overrides */
+        [data-theme="dark"] .portfolio-card {
+            border-color: #333;
+        }
+        [data-theme="dark"] .portfolio-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+        [data-theme="dark"] .filter-btn {
+            background: #252525;
+            border-color: #555;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border-color: var(--accent);
+        }
+        .card-images {
+            display: flex;
+            gap: 4px;
+        }
+        .card-images img {
+            width: 50%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .card-body h3 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        .card-body .description {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .card-tag {
+            align-self: flex-start;
+            background: var(--accent);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-images {
+                flex-direction: column;
+            }
+            .card-images img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <section class="portfolio-section anim anim-up">
+        <h2 data-i18n="portfolio.title">Наши работы</h2>
+        <p class="portfolio-subtitle" data-i18n="portfolio.subtitle">Результаты до и после по каждому направлению</p>
+
+        <div class="portfolio-filter">
+            <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Все</button>
+            <button class="filter-btn" data-filter="wrapping" data-i18n="filter.wrapping">Оклейка</button>
+            <button class="filter-btn" data-filter="tinting" data-i18n="filter.tinting_portfolio">Тонировка</button>
+            <button class="filter-btn" data-filter="interior" data-i18n="filter.interior_portfolio">Интерьер</button>
+        </div>
+
+        <div class="portfolio-grid" data-anim-children="up">
+            <div class="portfolio-card" data-category="wrapping">
+                <div class="card-images">
+                    <img src="https://placehold.co/600x400/1E1E1E/FFFFFF?text=До" alt="До оклейки Porsche">
+                    <img src="https://placehold.co/600x400/1E1E1E/FF5A00?text=После" alt="После оклейки Porsche">
+                </div>
+                <div class="card-body">
+                    <h3>Porsche 911 Turbo S</h3>
+                    <p class="description" data-i18n="portfolio.wrapping.1.desc">Полная оклейка кузова полиуретановой плёнкой XPEL Ultimate Plus. Защита от сколов, песка и ультрафиолета.</p>
+                    <span class="card-tag" data-i18n="portfolio.tag.wrapping_ppf">Оклейка PPF</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="wrapping">
+                <div class="card-images">
+                    <img src="https://placehold.co/600x400/1E1E1E/FFFFFF?text=До" alt="До оклейки Mercedes">
+                    <img src="https://placehold.co/600x400/1E1E1E/FF5A00?text=После" alt="После оклейки Mercedes">
+                </div>
+                <div class="card-body">
+                    <h3>Mercedes AMG GT</h3>
+                    <p class="description" data-i18n="portfolio.wrapping.2.desc">Оклейка виниловой плёнкой 3M Gloss Flip Deep Space. Эффект перелива и глубокая текстура.</p>
+                    <span class="card-tag" data-i18n="portfolio.tag.wrapping_vinyl">Оклейка винил</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="tinting">
+                <div class="card-images">
+                    <img src="https://placehold.co/600x400/1E1E1E/FFFFFF?text=До" alt="До тонировки Range Rover">
+                    <img src="https://placehold.co/600x400/1E1E1E/FF5A00?text=После" alt="После тонировки Range Rover">
+                </div>
+                <div class="card-body">
+                    <h3>Range Rover Sport</h3>
+                    <p class="description" data-i18n="portfolio.tinting.1.desc">Атермальная тонировка Llumar Air 80. Защита от ИК-излучения, без затемнения стёкол.</p>
+                    <span class="card-tag" data-i18n="portfolio.tag.tinting">Тонировка</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="interior">
+                <div class="card-images">
+                    <img src="https://placehold.co/600x400/1E1E1E/FFFFFF?text=До" alt="До установки звёздного неба">
+                    <img src="https://placehold.co/600x400/1E1E1E/FF5A00?text=После" alt="После установки звёздного неба">
+                </div>
+                <div class="card-body">
+                    <h3>Bentley Continental GT</h3>
+                    <p class="description" data-i18n="portfolio.starry.1.desc">Установка звёздного неба 800 оптоволоконных нитей + падающие метеоры. RGB-подсветка с пультом.</p>
+                    <span class="card-tag" data-i18n="portfolio.tag.starry">Звёздное небо</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="interior">
+                <div class="card-images">
+                    <img src="https://placehold.co/600x400/1E1E1E/FFFFFF?text=До" alt="До перешива салона">
+                    <img src="https://placehold.co/600x400/1E1E1E/FF5A00?text=После" alt="После перешива салона">
+                </div>
+                <div class="card-body">
+                    <h3>BMW X6</h3>
+                    <p class="description" data-i18n="portfolio.interior.1.desc">Полный перешив салона кожей Nappa и алькантарой. Индивидуальная прострочка, сохранение подогревов.</p>
+                    <span class="card-tag" data-i18n="portfolio.tag.retrim">Перешив салона</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-category="interior">
+                <div class="card-images">
+                    <img src="https://placehold.co/600x400/1E1E1E/FFFFFF?text=До" alt="До установки звёздного неба">
+                    <img src="https://placehold.co/600x400/1E1E1E/FF5A00?text=После" alt="После установки звёздного неба">
+                </div>
+                <div class="card-body">
+                    <h3>Cadillac Escalade</h3>
+                    <p class="description" data-i18n="portfolio.starry.2.desc">Эксклюзивное звёздное небо с рисунком созвездий. Более 600 нитей, синхронизация с музыкой.</p>
+                    <span class="card-tag" data-i18n="portfolio.tag.starry">Звёздное небо</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">Violet <span>Gloss</span></div>
+                    <p data-i18n="footer.desc">Премиальный детейлинг-центр в Дубае. Защищаем и преображаем автомобили с 2017 года.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.services">Услуги</h4>
+                    <ul>
+                        <li><a href="wrapping.html" data-i18n="footer.service.wrapping">Оклейка кузова</a></li>
+                        <li><a href="tinting.html" data-i18n="footer.service.tinting">Тонировка</a></li>
+                        <li><a href="noise-isolation.html" data-i18n="footer.service.soundproofing">Шумоизоляция</a></li>
+                        <li><a href="leather-restoration.html" data-i18n="footer.service.leather">Реставрация кожи</a></li>
+                        <li><a href="oil-change.html" data-i18n="footer.service.oil">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contacts">Контакты</h4>
+                    <ul>
+                        <li data-i18n="footer.dubai">Дубай, ОАЭ</li>
+                        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
+                        <li><a href="mailto:info@violetgloss.ae">info@violetgloss.ae</a></li>
+                        <li data-i18n="footer.hours">Пн–Сб: 9:00–21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2026 Violet Gloss. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.portfolio-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                        // Re-trigger anim
+                        card.classList.remove('visible');
+                        card.offsetHeight;
+                        card.classList.add('visible');
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="module" src="javascript/main.js"></script>
+    <script>
+        window.initCustomSelects && window.initCustomSelects();
+    </script>
+</body>
+</html>

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — Violet Gloss</title>
+    <meta name="description" content="Создайте аккаунт Violet Gloss для доступа к личному кабинету и премиальным услугам.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--milk);
+            padding: 20px;
+        }
+        .auth-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .auth-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            margin-bottom: 16px;
+            transition: color 0.2s;
+        }
+        .auth-back:hover {
+            color: var(--accent);
+        }
+        .auth-logo {
+            font-family: 'Manrope', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+        .auth-logo span { color: #FF5A00; }
+        .auth-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .steps-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #E0E0E0;
+            transition: background 0.3s;
+        }
+        .step-dot.active { background: #FF5A00; }
+        .step-dot.completed { background: #4CAF50; }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            background: var(--milk);
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FF5A00;
+            background: var(--white);
+        }
+        .input-password-wrapper {
+            position: relative;
+        }
+        .input-password-wrapper input {
+            padding-right: 48px;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-gray);
+        }
+        .phone-row {
+            display: flex;
+            gap: 10px;
+        }
+        .phone-row select {
+            width: 120px;
+            flex-shrink: 0;
+        }
+        .phone-row input {
+            flex: 1;
+        }
+        .btn-auth {
+            width: 100%;
+            padding: 14px;
+            background: #FF5A00;
+            color: #FFF;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .btn-auth:hover { background: #E65000; }
+        .btn-auth:disabled { background: #CCC; cursor: not-allowed; }
+        .btn-auth-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: var(--text-gray);
+            border: 1.5px solid #E0E0E0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn-auth-secondary:hover { background: #F5F5F5; }
+        .auth-error {
+            background: #FFF0F0;
+            color: #D32F2F;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .auth-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .auth-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #FF5A00;
+            text-decoration: none;
+        }
+        .auth-links a:hover { text-decoration: underline; }
+        .auth-links p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+        .step-section { display: none; }
+        .step-section.active { display: block; }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #F0F0F0;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-label { color: var(--text-gray); }
+        .summary-value { color: var(--text-dark); font-weight: 500; }
+        /* SMS Overlay */
+        .sms-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .sms-overlay.active { display: flex; }
+        .sms-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+        .sms-card h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .sms-card p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 24px;
+        }
+        .sms-inputs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .sms-inputs input {
+            width: 44px;
+            height: 52px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: var(--milk);
+        }
+        .sms-inputs input:focus {
+            outline: none;
+            border-color: #FF5A00;
+            background: var(--white);
+        }
+        /* Dark theme overrides */
+        [data-theme="dark"] .form-group input,
+        [data-theme="dark"] .form-group select {
+            background: #252525;
+            border-color: #444;
+            color: var(--text-dark);
+        }
+        [data-theme="dark"] .form-group input:focus,
+        [data-theme="dark"] .form-group select:focus {
+            background: #2a2a2a;
+        }
+        [data-theme="dark"] .auth-card {
+            background: #1E1E1E;
+        }
+        [data-theme="dark"] .btn-auth-secondary {
+            background: transparent;
+            border-color: #444;
+            color: var(--text-gray);
+        }
+        [data-theme="dark"] .btn-auth-secondary:hover {
+            background: #252525;
+        }
+        [data-theme="dark"] .summary-row {
+            border-bottom-color: #333;
+        }
+        [data-theme="dark"] .sms-card {
+            background: #1E1E1E;
+        }
+        [data-theme="dark"] .sms-inputs input {
+            background: #252525;
+            border-color: #444;
+            color: var(--text-dark);
+        }
+        [data-theme="dark"] .sms-inputs input:focus {
+            background: #2a2a2a;
+        }
+        /* Custom validation styles */
+        .form-group.error input,
+        .form-group.error select {
+            border-color: #d32f2f !important;
+            background: rgba(211, 47, 47, 0.04);
+        }
+        .form-group .error-message {
+            color: #d32f2f;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+        [data-theme="dark"] .form-group.error input,
+        [data-theme="dark"] .form-group.error select {
+            background: rgba(211, 47, 47, 0.1);
+        }
+        /* Birthday dropdowns */
+        .birthday-row {
+            display: flex;
+            gap: 10px;
+        }
+        .birthday-row select {
+            flex: 1;
+            padding: 13px 16px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            background: #FAFAFA;
+            box-sizing: border-box;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+        }
+        .birthday-row select:focus {
+            outline: none;
+            border-color: #FF5A00;
+            background-color: #FFF;
+        }
+        [data-theme="dark"] .birthday-row select {
+            background-color: #252525;
+            border-color: #444;
+            color: var(--text-dark);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23aaa' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        }
+        [data-theme="dark"] .birthday-row select:focus {
+            background-color: #2a2a2a;
+        }
+        [data-theme="dark"] .birthday-row select option {
+            background: #252525;
+        }
+        /* Phone country code select */
+        .phone-row select.phone-country-select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 28px;
+        }
+        [data-theme="dark"] .phone-row select.phone-country-select {
+            background-color: #252525;
+            border-color: #444;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23aaa' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        }
+        [data-theme="dark"] .phone-row select.phone-country-select option {
+            background: #252525;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-card">
+            <a href="index.html" class="auth-back">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                <span data-i18n="reg.home">На главную</span>
+            </a>
+            <div class="auth-logo">Violet <span>Gloss</span></div>
+            <p class="auth-subtitle" data-i18n="reg.title">Создайте аккаунт</p>
+
+            <div class="steps-indicator">
+                <div class="step-dot active" data-step="1"></div>
+                <div class="step-dot" data-step="2"></div>
+                <div class="step-dot" data-step="3"></div>
+                <div class="step-dot" data-step="4"></div>
+                <div class="step-dot" data-step="5"></div>
+            </div>
+
+            <div class="auth-error" id="register-error"></div>
+
+            <!-- Step 1: Email -->
+            <div class="step-section active" id="step-1">
+                <form class="auth-form" id="form-step-1" novalidate>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="email@example.com" data-i18n-ph="reg.email.ph" required>
+                    </div>
+                    <button type="submit" class="btn-auth" data-i18n="reg.next">Далее</button>
+                </form>
+            </div>
+
+            <!-- Step 2: Password -->
+            <div class="step-section" id="step-2">
+                <form class="auth-form" id="form-step-2" novalidate>
+                    <div class="form-group">
+                        <label for="reg-password" data-i18n="reg.password">Пароль</label>
+                        <div class="input-password-wrapper">
+                            <input type="password" id="reg-password" placeholder="Минимум 6 символов" data-i18n-ph="reg.password.ph" required minlength="6">
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('reg-password', this)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password-confirm" data-i18n="reg.password.confirm">Подтвердите пароль</label>
+                        <div class="input-password-wrapper">
+                            <input type="password" id="reg-password-confirm" placeholder="Повторите пароль" data-i18n-ph="reg.password.confirm.ph" required>
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('reg-password-confirm', this)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-auth" data-i18n="reg.next">Далее</button>
+                    <button type="button" class="btn-auth-secondary" onclick="goToStep(1)" data-i18n="reg.back">Назад</button>
+                </form>
+            </div>
+
+            <!-- Step 3: Personal Info -->
+            <div class="step-section" id="step-3">
+                <form class="auth-form" id="form-step-3" novalidate>
+                    <div class="form-group">
+                        <label for="reg-name" data-i18n="reg.name">Имя</label>
+                        <input type="text" id="reg-name" placeholder="Ваше имя" data-i18n-ph="reg.name.ph" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-surname" data-i18n="reg.surname">Фамилия</label>
+                        <input type="text" id="reg-surname" placeholder="Ваша фамилия" data-i18n-ph="reg.surname.ph" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="reg.birthday">Дата рождения</label>
+                        <div class="birthday-row">
+                            <select id="reg-birth-day" required>
+                                <option value="" data-i18n="misc.day">День</option>
+                            </select>
+                            <select id="reg-birth-month" required>
+                                <option value="" data-i18n="misc.month">Месяц</option>
+                                <option value="01" data-i18n="month.01">Январь</option>
+                                <option value="02" data-i18n="month.02">Февраль</option>
+                                <option value="03" data-i18n="month.03">Март</option>
+                                <option value="04" data-i18n="month.04">Апрель</option>
+                                <option value="05" data-i18n="month.05">Май</option>
+                                <option value="06" data-i18n="month.06">Июнь</option>
+                                <option value="07" data-i18n="month.07">Июль</option>
+                                <option value="08" data-i18n="month.08">Август</option>
+                                <option value="09" data-i18n="month.09">Сентябрь</option>
+                                <option value="10" data-i18n="month.10">Октябрь</option>
+                                <option value="11" data-i18n="month.11">Ноябрь</option>
+                                <option value="12" data-i18n="month.12">Декабрь</option>
+                            </select>
+                            <select id="reg-birth-year" required data-no-vg>
+                                <option value="" data-i18n="misc.year">Год</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="reg-birthdate">
+                    </div>
+                    <button type="submit" class="btn-auth" data-i18n="reg.next">Далее</button>
+                    <button type="button" class="btn-auth-secondary" onclick="goToStep(2)" data-i18n="reg.back">Назад</button>
+                </form>
+            </div>
+
+            <!-- Step 4: Phone -->
+            <div class="step-section" id="step-4">
+                <form class="auth-form" id="form-step-4" novalidate>
+                    <div class="form-group">
+                        <label for="reg-phone" data-i18n="reg.phone">Телефон</label>
+                        <div class="phone-row">
+                            <select id="reg-country-code" class="phone-country-select">
+                                <option value="+971" data-i18n="country.UAE">+971 ОАЭ</option>
+                                <option value="+7" data-i18n="country.RU">+7 Россия</option>
+                                <option value="+1" data-i18n="country.US">+1 США</option>
+                                <option value="+44" data-i18n="country.GB">+44 Великобритания</option>
+                                <option value="+49" data-i18n="country.DE">+49 Германия</option>
+                                <option value="+33" data-i18n="country.FR">+33 Франция</option>
+                                <option value="+998" data-i18n="country.UZ">+998 Узбекистан</option>
+                                <option value="+996" data-i18n="country.KG">+996 Кыргызстан</option>
+                                <option value="+992" data-i18n="country.TJ">+992 Таджикистан</option>
+                                <option value="+993" data-i18n="country.TM">+993 Туркменистан</option>
+                                <option value="+994" data-i18n="country.AZ">+994 Азербайджан</option>
+                                <option value="+995" data-i18n="country.GE">+995 Грузия</option>
+                                <option value="+380" data-i18n="country.UA">+380 Украина</option>
+                                <option value="+375" data-i18n="country.BY">+375 Беларусь</option>
+                                <option value="+370" data-i18n="country.LT">+370 Литва</option>
+                                <option value="+371" data-i18n="country.LV">+371 Латвия</option>
+                                <option value="+372" data-i18n="country.EE">+372 Эстония</option>
+                                <option value="+90" data-i18n="country.TR">+90 Турция</option>
+                                <option value="+966" data-i18n="country.SA">+966 Саудовская Аравия</option>
+                                <option value="+974" data-i18n="country.QA">+974 Катар</option>
+                                <option value="+965" data-i18n="country.KW">+965 Кувейт</option>
+                                <option value="+968" data-i18n="country.OM">+968 Оман</option>
+                                <option value="+973" data-i18n="country.BH">+973 Бахрейн</option>
+                            </select>
+                            <input type="tel" id="reg-phone" placeholder="Введите номер" data-i18n-ph="reg.phone.ph" inputmode="numeric" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-auth" data-i18n="reg.next">Далее</button>
+                    <button type="button" class="btn-auth-secondary" onclick="goToStep(3)" data-i18n="reg.back">Назад</button>
+                </form>
+            </div>
+
+            <!-- Step 5: Summary -->
+            <div class="step-section" id="step-5">
+                <h3 style="font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px;" data-i18n="reg.summary">Проверьте данные</h3>
+                <div id="summary-content"></div>
+                <button type="button" class="btn-auth" id="btn-register" onclick="registerUser()" data-i18n="reg.submit">Зарегистрироваться</button>
+                <button type="button" class="btn-auth-secondary" onclick="goToStep(4)" data-i18n="reg.back">Назад</button>
+            </div>
+
+            <div class="auth-links">
+                <p><span data-i18n="reg.has.account">Уже есть аккаунт?</span> <a href="login.html" data-i18n="reg.login">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Verification Overlay -->
+    <div class="sms-overlay" id="sms-overlay">
+        <div class="sms-card">
+            <h3 data-i18n="sms.title">Подтверждение телефона</h3>
+            <p data-i18n="sms.desc">Введите код из SMS (тестовый код: 123456)</p>
+            <div class="sms-inputs">
+                <input type="text" maxlength="1" class="sms-digit" data-index="0">
+                <input type="text" maxlength="1" class="sms-digit" data-index="1">
+                <input type="text" maxlength="1" class="sms-digit" data-index="2">
+                <input type="text" maxlength="1" class="sms-digit" data-index="3">
+                <input type="text" maxlength="1" class="sms-digit" data-index="4">
+                <input type="text" maxlength="1" class="sms-digit" data-index="5">
+            </div>
+            <button class="btn-auth" id="btn-verify-sms" data-i18n="btn.verify">Подтвердить</button>
+            <button class="btn-auth-secondary" onclick="closeSmsOverlay()" data-i18n="btn.cancel">Отмена</button>
+            <div class="auth-error" id="sms-error" style="margin-top: 16px;"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const regData = {
+            email: '',
+            password: '',
+            name: '',
+            surname: '',
+            birthdate: '',
+            phone: '',
+            countryCode: '+971'
+        };
+
+        // Populate birthday dropdowns
+        const birthDaySelect = document.getElementById('reg-birth-day');
+        for (let i = 1; i <= 31; i++) {
+            const opt = document.createElement('option');
+            opt.value = String(i).padStart(2, '0');
+            opt.textContent = i;
+            birthDaySelect.appendChild(opt);
+        }
+        const birthYearSelect = document.getElementById('reg-birth-year');
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear; i >= currentYear - 100; i--) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = i;
+            birthYearSelect.appendChild(opt);
+        }
+
+        // Validation helpers
+        function validateField(input, message) {
+            const group = input.closest('.form-group');
+            if (!group) return false;
+            
+            // Remove existing error
+            group.classList.remove('error');
+            const existingMsg = group.querySelector('.error-message');
+            if (existingMsg) existingMsg.remove();
+            
+            if (!input.value.trim()) {
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = message;
+                group.appendChild(msg);
+                return false;
+            }
+            return true;
+        }
+
+        function validateEmail(input) {
+            const group = input.closest('.form-group');
+            group.classList.remove('error');
+            const existingMsg = group.querySelector('.error-message');
+            if (existingMsg) existingMsg.remove();
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!input.value.trim()) {
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.emailRequired') : 'Введите email';
+                group.appendChild(msg);
+                return false;
+            }
+            if (!emailRegex.test(input.value.trim())) {
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.emailInvalid') : 'Введите корректный email';
+                group.appendChild(msg);
+                return false;
+            }
+            return true;
+        }
+
+        function clearValidation(input) {
+            const group = input.closest('.form-group');
+            if (group) {
+                group.classList.remove('error');
+                const msg = group.querySelector('.error-message');
+                if (msg) msg.remove();
+            }
+        }
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+            } else {
+                input.type = 'password';
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+            }
+        }
+
+        function goToStep(step) {
+            hideError(); // Clear any error messages
+            // Clear all validation errors on the current step
+            document.querySelectorAll('.form-group.error').forEach(g => {
+                g.classList.remove('error');
+                const msg = g.querySelector('.error-message');
+                if (msg) msg.remove();
+            });
+
+            document.querySelectorAll('.step-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+
+            document.querySelectorAll('.step-dot').forEach(dot => {
+                const dotStep = parseInt(dot.getAttribute('data-step'));
+                dot.classList.remove('active', 'completed');
+                if (dotStep < step) dot.classList.add('completed');
+                if (dotStep === step) dot.classList.add('active');
+            });
+
+            currentStep = step;
+
+            if (step === 5) {
+                renderSummary();
+            }
+        }
+
+        function renderSummary() {
+            const monthNamesShort = window.t ? [window.t('month.gen.01'),window.t('month.gen.02'),window.t('month.gen.03'),window.t('month.gen.04'),window.t('month.gen.05'),window.t('month.gen.06'),window.t('month.gen.07'),window.t('month.gen.08'),window.t('month.gen.09'),window.t('month.gen.10'),window.t('month.gen.11'),window.t('month.gen.12')] : ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+            let dateStr = regData.birthdate;
+            if (regData.birthdate) {
+                const parts = regData.birthdate.split('.');
+                if (parts.length === 3) {
+                    const day = parts[0];
+                    const monthNum = parts[1];
+                    const year = parts[2];
+                    dateStr = `${day} ${monthNamesShort[parseInt(monthNum) - 1]} ${year}`;
+                }
+            }
+
+            const summaryContent = document.getElementById('summary-content');
+            summaryContent.innerHTML = `
+                <div class="summary-row"><span class="summary-label">${window.t ? window.t('reg.summary.email') : 'Email'}</span><span class="summary-value">${regData.email}</span></div>
+                <div class="summary-row"><span class="summary-label">${window.t ? window.t('reg.summary.name') : 'Имя'}</span><span class="summary-value">${regData.name}</span></div>
+                <div class="summary-row"><span class="summary-label">${window.t ? window.t('reg.summary.surname') : 'Фамилия'}</span><span class="summary-value">${regData.surname}</span></div>
+                <div class="summary-row"><span class="summary-label">${window.t ? window.t('reg.summary.birthday') : 'Дата рождения'}</span><span class="summary-value">${dateStr}</span></div>
+                <div class="summary-row"><span class="summary-label">${window.t ? window.t('reg.summary.phone') : 'Телефон'}</span><span class="summary-value">${regData.countryCode} ${regData.phone}</span></div>
+            `;
+        }
+
+        // Step 1 (Email)
+        document.getElementById('form-step-1').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById('reg-email');
+            if (validateEmail(emailInput)) {
+                regData.email = emailInput.value;
+                hideError();
+                goToStep(2);
+            }
+        });
+
+        // Step 2 (Password)
+        document.getElementById('form-step-2').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const passInput = document.getElementById('reg-password');
+            const confirmInput = document.getElementById('reg-password-confirm');
+            
+            // Clear previous errors
+            clearValidation(passInput);
+            clearValidation(confirmInput);
+            
+            const password = passInput.value;
+            const confirmPassword = confirmInput.value;
+
+            let valid = true;
+            
+            if (!password) {
+                const group = passInput.closest('.form-group');
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.passwordRequired') : 'Введите пароль';
+                group.appendChild(msg);
+                valid = false;
+            } else if (password.length < 6) {
+                const group = passInput.closest('.form-group');
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.passwordMinLength') : 'Пароль должен содержать минимум 6 символов';
+                group.appendChild(msg);
+                valid = false;
+            }
+            
+            if (!confirmPassword) {
+                const group = confirmInput.closest('.form-group');
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.passwordConfirm') : 'Подтвердите пароль';
+                group.appendChild(msg);
+                valid = false;
+            } else if (password !== confirmPassword) {
+                const group = confirmInput.closest('.form-group');
+                group.classList.add('error');
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.passwordMismatch') : 'Пароли не совпадают';
+                group.appendChild(msg);
+                valid = false;
+            }
+            
+            if (valid) {
+                regData.password = password;
+                hideError();
+                goToStep(3);
+            }
+        });
+
+        // Step 3 (Personal Info)
+        document.getElementById('form-step-3').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById('reg-name');
+            const surnameInput = document.getElementById('reg-surname');
+            const daySelect = document.getElementById('reg-birth-day');
+            const monthSelect = document.getElementById('reg-birth-month');
+            const yearSelect = document.getElementById('reg-birth-year');
+            
+            let valid = true;
+            if (!validateField(nameInput, window.t ? window.t('validation.firstNameRequired') : 'Введите имя')) valid = false;
+            if (!validateField(surnameInput, window.t ? window.t('validation.lastNameRequired') : 'Введите фамилию')) valid = false;
+            
+            // Validate birthday
+            if (!daySelect.value || !monthSelect.value || !yearSelect.value) {
+                const group = daySelect.closest('.form-group');
+                group.classList.add('error');
+                const existing = group.querySelector('.error-message');
+                if (existing) existing.remove();
+                const msg = document.createElement('span');
+                msg.className = 'error-message';
+                msg.textContent = window.t ? window.t('validation.dobFull') : 'Укажите полную дату рождения';
+                group.appendChild(msg);
+                valid = false;
+            }
+            
+            if (valid) {
+                regData.name = nameInput.value;
+                regData.surname = surnameInput.value;
+                regData.birthdate = `${daySelect.value}.${monthSelect.value}.${yearSelect.value}`;
+                goToStep(4);
+            }
+        });
+
+        // Step 4 (Phone)
+        document.getElementById('form-step-4').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const phoneInput = document.getElementById('reg-phone');
+            if (validateField(phoneInput, window.t ? window.t('validation.phoneRequired') : 'Введите номер телефона')) {
+                regData.countryCode = document.getElementById('reg-country-code').value;
+                regData.phone = phoneInput.value;
+                goToStep(5);
+            }
+        });
+
+        // Clear validation on input
+        document.querySelectorAll('.auth-form input, .auth-form select').forEach(input => {
+            input.addEventListener('input', () => clearValidation(input));
+            input.addEventListener('change', () => clearValidation(input));
+        });
+
+        function showError(msg) {
+            const err = document.getElementById('register-error');
+            err.textContent = msg;
+            err.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('register-error').style.display = 'none';
+        }
+
+        // SMS Overlay
+        function openSmsOverlay() {
+            document.getElementById('sms-overlay').classList.add('active');
+            document.querySelectorAll('.sms-digit')[0].focus();
+        }
+
+        function closeSmsOverlay() {
+            document.getElementById('sms-overlay').classList.remove('active');
+            document.querySelectorAll('.sms-digit').forEach(input => input.value = '');
+        }
+
+        // SMS digit auto-focus
+        document.querySelectorAll('.sms-digit').forEach((input, idx, inputs) => {
+            input.addEventListener('input', () => {
+                if (input.value && idx < inputs.length - 1) {
+                    inputs[idx + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && idx > 0) {
+                    inputs[idx - 1].focus();
+                }
+            });
+        });
+
+        // SMS Verify
+        document.getElementById('btn-verify-sms').addEventListener('click', () => {
+            const code = Array.from(document.querySelectorAll('.sms-digit')).map(i => i.value).join('');
+            const smsError = document.getElementById('sms-error');
+
+            if (code === '123456') {
+                smsError.style.display = 'none';
+                completeRegistration();
+            } else {
+                smsError.textContent = window.t ? window.t('profile.error.wrong_code') : 'Неверный код подтверждения';
+                smsError.style.display = 'block';
+            }
+        });
+
+        // Registration with Firebase
+        async function registerUser() {
+            const btnRegister = document.getElementById('btn-register');
+            btnRegister.disabled = true;
+            btnRegister.textContent = window.t ? window.t('auth.registering') : 'Регистрация...';
+
+            try {
+                const userCredential = await firebase.auth().createUserWithEmailAndPassword(regData.email, regData.password);
+                const user = userCredential.user;
+
+                // Save to Firestore
+                await firebase.firestore().collection('users').doc(user.uid).set({
+                    email: regData.email,
+                    name: regData.name,
+                    surname: regData.surname,
+                    birthdate: regData.birthdate,
+                    phone: regData.countryCode + ' ' + regData.phone,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Send email verification
+                await user.sendEmailVerification();
+
+                // Open SMS overlay (mock)
+                openSmsOverlay();
+
+            } catch (error) {
+                showError(getErrorMessage(error.code));
+                btnRegister.disabled = false;
+                btnRegister.textContent = window.t ? window.t('auth.register') : 'Зарегистрироваться';
+            }
+        }
+
+        async function completeRegistration() {
+            closeSmsOverlay();
+            // Redirect to main page after successful registration
+            window.location.href = 'index.html';
+        }
+
+        function getErrorMessage(code) {
+            const messages = {
+                'auth/email-already-in-use': window.t ? window.t('error.emailAlreadyInUse') : 'Этот email уже зарегистрирован',
+                'auth/invalid-email': window.t ? window.t('error.invalidEmail') : 'Некорректный email',
+                'auth/weak-password': window.t ? window.t('error.weakPassword') : 'Пароль слишком простой',
+                'auth/too-many-requests': window.t ? window.t('error.tooManyRequests') : 'Слишком много попыток'
+            };
+            return messages[code] || (window.t ? window.t('error.networkError') : 'Произошла ошибка. Попробуйте ещё раз.');
+        }
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBk8SHgxCOYjIrFkixIFAoy_BRpWsIUd7w",
+            authDomain: "violet-gloss.firebaseapp.com",
+            projectId: "violet-gloss",
+            storageBucket: "violet-gloss.firebasestorage.app",
+            messagingSenderId: "330589029963",
+            appId: "1:330589029963:web:a4947df92909e6d045afce"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- Main JS for language, custom selects, etc. -->
+    <script type="module" src="javascript/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Delay to let main.js module load first
+            setTimeout(function() {
+                if (window.initCustomSelects) window.initCustomSelects();
+            }, 300);
+        });
+    </script>
+</body>
+</html>

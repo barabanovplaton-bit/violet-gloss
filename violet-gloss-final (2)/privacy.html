@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script>
+(function(){
+    var t=localStorage.getItem('vg-theme');
+    if(t==='dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+    } else if(t==='system'){
+        if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+            document.documentElement.setAttribute('data-theme','dark');
+        }
+    }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности — Violet Gloss</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="header-container"></div>
+    <div style="max-width:800px;margin:60px auto;padding:20px 40px;">
+        <h1 style="font-family:'Manrope',sans-serif;font-weight:300;font-size:2.5rem;margin-bottom:24px;" data-i18n="privacy.title">Политика конфиденциальности</h1>
+        <p style="color:var(--text-gray);line-height:1.8;margin-bottom:20px;" data-i18n="privacy.desc">Мы уважаем вашу приватность. Данные, которые вы предоставляете (имя, email, телефон), используются исключительно для записи на услуги и связи с вами. Мы не передаём их третьим лицам. Вы можете запросить удаление своих данных, написав на info@violetgloss.ae.</p>
+        <a href="index.html" style="color:var(--accent);text-decoration:none;font-weight:500;" data-i18n="btn.back_home">← На главную</a>
+    </div>
+    <script type="module" src="javascript/main.js"></script>
+</body>
+</html>
